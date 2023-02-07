@@ -21,20 +21,20 @@ outputFolder = None
 
 model_dict = {
     "realesrgan": {
-        "sr_path": "/content/drive/MyDrive/URetinex-Net-main/demo/realesrgan_pt_weight/Real-ESRGAN-master/",
-        "model_path": "/content/drive/MyDrive/URetinex-Net-main/demo/realesrgan_pt_weight/Real-ESRGAN-master/experiments/finetune_RealESRGANx4plus_400k_pairdata/models/net_g_17500.pth"
+        "sr_path": "ESRGAN",
+        "model_path": "experiments/pretrained_models/net_g_15000_realesrgan.pth"
     },
     "msrresnet": {
-        "sr_path": "/content/drive/MyDrive/Super_Resolution_code/KAIR-master/",
-        "model_path": "/content/drive/MyDrive/Super_Resolution_code/KAIR-master/pretrained_weights/msrresnet_x4_psnr.pth"
+        "sr_path": "MSR_SWINIR",
+        "model_path": "pretrained_weights/msrresnet_x4_psnr.pth"
     },
     "swinir": {
-        "sr_path": "/content/drive/MyDrive/Super_Resolution_code/KAIR-master/",
-        "model_path": " /content/drive/MyDrive/Super_Resolution_code/KAIR-master/pretrained_weights/001_classicalSR_DF2K_s64w8_SwinIR-M_x4.pth"
+        "sr_path": "MSR_SWINIR",
+        "model_path": "pretrained_weights/20000_G_swinIr.pth"
     },
     "HAT": {
-        "sr_path": "/content/drive/MyDrive/Super_Resolution_code/HAT/hat",
-        "model_path": "/content/drive/MyDrive/URetinex-Net-main/demo/HAT-main/pretrained_weights_5000_from_previous_data/train_HAT_SRx4_finetune_from_ImageNet_pretrain/models/net_g_5000.pth"
+        "sr_path": "HAT/hat",
+        "model_path": "../experiments/pretrained_models/net_g_5000_hat.pth"
     }
 }
 
@@ -98,7 +98,7 @@ while i < len(argList):
         scales.append(scale)
         commands.append(command)
     elif argList[i] in {"int"}:
-        inPath = "/content/drive/MyDrive/Interpolate/interpolate.py"
+        inPath = "Interpolate/interpolate.py"
         scale = 4
         model = "bicubic"
         i+=1
@@ -118,7 +118,7 @@ while i < len(argList):
         scales.append(scale)
         commands.append(command)
     elif i<len(argList) and argList[i] in {"enh"}:
-        enPath = "/content/drive/MyDrive/URetinex-Net-main"
+        enPath = "LightEnhancement"
         scale = 1
         model = "URetinex"
         i+=1
@@ -138,7 +138,7 @@ while i < len(argList):
         scales.append(scale)
         commands.append(command)
     elif i<len(argList) and argList[i] in {"shp"}:
-        shpPath = "/content/drive/MyDrive/Sharpen_Denoise"
+        shpPath = "Sharpen_Denoise"
         scale = 1
         model = "blur"
         i+=1
@@ -154,7 +154,7 @@ while i < len(argList):
         scales.append(scale)
         commands.append(command)
     elif i<len(argList) and argList[i] in ("den"):
-        denPath = "/content/drive/MyDrive/Sharpen_Denoise/NAFNet"
+        denPath = "Sharpen_Denoise/NAFNet"
         scale = 1
         model = "NAFNet"
         tile = None

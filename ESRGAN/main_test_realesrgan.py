@@ -13,7 +13,7 @@ def main():
     """Inference demo for Real-ESRGAN.
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument('--folder_lq', type=str, default="/content/drive/MyDrive/Super_Resolution_code/KAIR-master/testsets/hr_tests", help='input low-quality test image folder')
+    parser.add_argument('--folder_lq', type=str, default="inputs", help='input low-quality test image folder')
     parser.add_argument('--file_name', type=str, default=None, help='specific file to do sr')
     parser.add_argument(
         '-n',
