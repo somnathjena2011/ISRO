@@ -1,0 +1,8 @@
+23-01-28 14:38:31.680 : Model path: model_zoo/msrresnet_x4_psnr.pth
+23-01-28 14:38:31.682 : Params number: 1517571
+23-01-28 14:38:31.682 : model_name:msrresnet_x4_psnr, image sigma:0
+23-01-28 14:38:31.682 : testsets/hr_tests
+23-01-28 14:40:07.584 : Model path: model_zoo/msrresnet_x4_psnr.pth
+23-01-28 14:40:07.586 : Params number: 1517571
+23-01-28 14:40:07.586 : model_name:msrresnet_x4_psnr, image sigma:0
+23-01-28 14:40:07.586 : testsets/hr_tests

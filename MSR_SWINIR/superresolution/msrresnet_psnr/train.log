@@ -1,0 +1,3790 @@
+23-01-31 05:30:03.854 :   task: msrresnet_psnr
+  model: plain
+  gpu_ids: [0]
+  dist: False
+  scale: 4
+  n_channels: 3
+  sigma: 0
+  sigma_test: 0
+  merge_bn: False
+  merge_bn_startpoint: 400000
+  path:[
+    root: superresolution
+    pretrained_netG: None
+    pretrained_netE: None
+    task: superresolution/msrresnet_psnr
+    log: superresolution/msrresnet_psnr
+    options: superresolution/msrresnet_psnr/options
+    models: superresolution/msrresnet_psnr/models
+    images: superresolution/msrresnet_psnr/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/trainH
+      dataroot_L: None
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 32
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/TestH
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  netG:[
+    net_type: msrresnet0
+    in_nc: 3
+    out_nc: 3
+    nc: 64
+    nb: 16
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: upconv
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: False
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200000, 400000, 600000, 800000, 1000000, 2000000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+  ]
+  opt_path: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/options/train_msrresnet_psnr.json
+  is_train: True
+  find_unused_parameters: True
+  use_static_graph: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+23-01-31 05:30:04.272 : Number of train images: 4,636, iters: 145
+23-01-31 05:30:12.569 : 
+Networks name: MSRResNet0
+Params number: 1332928
+Net structure:
+MSRResNet0(
+  (model): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): Identity + 
+    |Sequential(
+    |  (0): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (1): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (2): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (3): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (4): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (5): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (6): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (7): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (8): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (9): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (10): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (11): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (12): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (13): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (14): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (15): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (16): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |)
+    (2): Upsample(scale_factor=2.0, mode=nearest)
+    (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Upsample(scale_factor=2.0, mode=nearest)
+    (6): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): ReLU(inplace=True)
+    (10): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+)
+
+23-01-31 05:30:12.597 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.001 | -0.077 |  0.088 |  0.025 | torch.Size([64, 3, 3, 3]) || model.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.0.bias
+ | -0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.0.bias
+ |  0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.2.bias
+ | -0.000 | -0.032 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.0.bias
+ | -0.000 | -0.037 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.2.bias
+ |  0.000 | -0.037 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.0.bias
+ | -0.000 | -0.039 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.2.bias
+ |  0.000 | -0.035 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.0.bias
+ | -0.000 | -0.033 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.2.bias
+ | -0.000 | -0.037 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.0.bias
+ |  0.000 | -0.032 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.2.bias
+ | -0.000 | -0.034 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.0.bias
+ | -0.000 | -0.033 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.2.bias
+ |  0.000 | -0.031 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.0.bias
+ | -0.000 | -0.036 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.2.bias
+ |  0.000 | -0.039 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.0.bias
+ |  0.000 | -0.039 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.2.bias
+ | -0.000 | -0.032 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.0.bias
+ | -0.000 | -0.032 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.2.bias
+ |  0.000 | -0.033 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.0.bias
+ | -0.000 | -0.031 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.2.bias
+ | -0.000 | -0.033 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.0.bias
+ | -0.000 | -0.033 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.2.bias
+ | -0.000 | -0.032 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.0.bias
+ |  0.000 | -0.033 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.2.bias
+ |  0.000 | -0.036 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.0.bias
+ | -0.000 | -0.032 |  0.042 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.2.bias
+ | -0.000 | -0.036 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.0.bias
+ | -0.000 | -0.031 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.2.bias
+ | -0.000 | -0.031 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.0.bias
+ | -0.000 | -0.035 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.2.bias
+ | -0.000 | -0.037 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.0.bias
+ | -0.000 | -0.030 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.2.bias
+ |  0.000 | -0.035 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.16.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.16.bias
+ | -0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.3.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.3.bias
+ |  0.000 | -0.035 |  0.041 |  0.008 | torch.Size([64, 64, 3, 3]) || model.6.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.6.bias
+ |  0.000 | -0.035 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.8.bias
+ | -0.000 | -0.025 |  0.032 |  0.008 | torch.Size([3, 64, 3, 3]) || model.10.weight
+
+23-01-31 05:43:14.425 : <epoch:  1, iter:     200, lr:1.000e-04> G_loss: 5.424e-02 
+23-01-31 05:54:10.655 :   task: msrresnet_psnr
+  model: plain
+  gpu_ids: [0]
+  dist: False
+  scale: 4
+  n_channels: 3
+  sigma: 0
+  sigma_test: 0
+  merge_bn: False
+  merge_bn_startpoint: 400000
+  path:[
+    root: superresolution
+    pretrained_netG: None
+    pretrained_netE: None
+    task: superresolution/msrresnet_psnr
+    log: superresolution/msrresnet_psnr
+    options: superresolution/msrresnet_psnr/options
+    models: superresolution/msrresnet_psnr/models
+    images: superresolution/msrresnet_psnr/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/trainH
+      dataroot_L: None
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 32
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/TestH
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  netG:[
+    net_type: msrresnet0
+    in_nc: 3
+    out_nc: 3
+    nc: 64
+    nb: 16
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: upconv
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: False
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200000, 400000, 600000, 800000, 1000000, 2000000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+  ]
+  opt_path: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/options/train_msrresnet_psnr.json
+  is_train: True
+  find_unused_parameters: True
+  use_static_graph: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+23-01-31 05:54:10.741 : Number of train images: 4,636, iters: 145
+23-01-31 05:54:16.409 : 
+Networks name: MSRResNet0
+Params number: 1332928
+Net structure:
+MSRResNet0(
+  (model): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): Identity + 
+    |Sequential(
+    |  (0): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (1): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (2): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (3): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (4): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (5): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (6): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (7): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (8): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (9): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (10): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (11): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (12): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (13): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (14): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (15): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (16): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |)
+    (2): Upsample(scale_factor=2.0, mode=nearest)
+    (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Upsample(scale_factor=2.0, mode=nearest)
+    (6): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): ReLU(inplace=True)
+    (10): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+)
+
+23-01-31 05:54:16.441 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.001 | -0.105 |  0.085 |  0.025 | torch.Size([64, 3, 3, 3]) || model.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.0.bias
+ |  0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.0.bias
+ | -0.000 | -0.033 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.2.bias
+ | -0.000 | -0.035 |  0.039 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.0.bias
+ |  0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.2.bias
+ |  0.000 | -0.031 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.0.bias
+ | -0.000 | -0.031 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.2.bias
+ | -0.000 | -0.034 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.0.bias
+ |  0.000 | -0.037 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.2.bias
+ | -0.000 | -0.036 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.0.bias
+ |  0.000 | -0.035 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.2.bias
+ | -0.000 | -0.035 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.0.bias
+ | -0.000 | -0.036 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.2.bias
+ |  0.000 | -0.032 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.0.bias
+ | -0.000 | -0.036 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.2.bias
+ |  0.000 | -0.033 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.0.bias
+ | -0.000 | -0.031 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.2.bias
+ | -0.000 | -0.034 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.0.bias
+ |  0.000 | -0.038 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.2.bias
+ |  0.000 | -0.036 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.0.bias
+ |  0.000 | -0.033 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.2.bias
+ | -0.000 | -0.035 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.0.bias
+ |  0.000 | -0.034 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.2.bias
+ | -0.000 | -0.042 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.0.bias
+ | -0.000 | -0.038 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.2.bias
+ | -0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.0.bias
+ |  0.000 | -0.031 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.2.bias
+ |  0.000 | -0.036 |  0.041 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.0.bias
+ |  0.000 | -0.037 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.2.bias
+ |  0.000 | -0.035 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.0.bias
+ |  0.000 | -0.031 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.2.bias
+ |  0.000 | -0.033 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.0.bias
+ | -0.000 | -0.041 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.2.bias
+ |  0.000 | -0.034 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.16.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.16.bias
+ |  0.000 | -0.040 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.3.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.3.bias
+ |  0.000 | -0.035 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.6.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.6.bias
+ |  0.000 | -0.034 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.8.bias
+ |  0.000 | -0.028 |  0.024 |  0.008 | torch.Size([3, 64, 3, 3]) || model.10.weight
+
+23-01-31 06:00:38.036 :   task: msrresnet_psnr
+  model: plain
+  gpu_ids: [0]
+  dist: False
+  scale: 4
+  n_channels: 3
+  sigma: 0
+  sigma_test: 0
+  merge_bn: False
+  merge_bn_startpoint: 400000
+  path:[
+    root: superresolution
+    pretrained_netG: None
+    pretrained_netE: None
+    task: superresolution/msrresnet_psnr
+    log: superresolution/msrresnet_psnr
+    options: superresolution/msrresnet_psnr/options
+    models: superresolution/msrresnet_psnr/models
+    images: superresolution/msrresnet_psnr/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/trainH
+      dataroot_L: None
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 32
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/TestH
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  netG:[
+    net_type: msrresnet0
+    in_nc: 3
+    out_nc: 3
+    nc: 64
+    nb: 16
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: upconv
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: False
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200000, 400000, 600000, 800000, 1000000, 2000000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+  ]
+  opt_path: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/options/train_msrresnet_psnr.json
+  is_train: True
+  find_unused_parameters: True
+  use_static_graph: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+23-01-31 06:00:38.262 : Number of train images: 4,636, iters: 145
+23-01-31 06:00:43.783 : 
+Networks name: MSRResNet0
+Params number: 1332928
+Net structure:
+MSRResNet0(
+  (model): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): Identity + 
+    |Sequential(
+    |  (0): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (1): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (2): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (3): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (4): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (5): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (6): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (7): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (8): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (9): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (10): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (11): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (12): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (13): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (14): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (15): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (16): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |)
+    (2): Upsample(scale_factor=2.0, mode=nearest)
+    (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Upsample(scale_factor=2.0, mode=nearest)
+    (6): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): ReLU(inplace=True)
+    (10): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+)
+
+23-01-31 06:00:43.797 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.082 |  0.086 |  0.025 | torch.Size([64, 3, 3, 3]) || model.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.0.bias
+ | -0.000 | -0.032 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.0.bias
+ |  0.000 | -0.033 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.2.bias
+ | -0.000 | -0.035 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.0.bias
+ |  0.000 | -0.033 |  0.040 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.2.bias
+ | -0.000 | -0.035 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.0.bias
+ | -0.000 | -0.034 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.2.bias
+ |  0.000 | -0.033 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.0.bias
+ |  0.000 | -0.033 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.2.bias
+ | -0.000 | -0.033 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.0.bias
+ |  0.000 | -0.037 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.2.bias
+ |  0.000 | -0.034 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.0.bias
+ | -0.000 | -0.033 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.2.bias
+ |  0.000 | -0.034 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.0.bias
+ | -0.000 | -0.037 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.2.bias
+ |  0.000 | -0.033 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.0.bias
+ |  0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.2.bias
+ |  0.000 | -0.033 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.0.bias
+ |  0.000 | -0.041 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.2.bias
+ |  0.000 | -0.030 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.0.bias
+ | -0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.2.bias
+ |  0.000 | -0.034 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.0.bias
+ | -0.000 | -0.037 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.2.bias
+ | -0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.0.bias
+ | -0.000 | -0.031 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.2.bias
+ | -0.000 | -0.032 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.0.bias
+ | -0.000 | -0.033 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.2.bias
+ | -0.000 | -0.037 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.0.bias
+ |  0.000 | -0.033 |  0.040 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.2.bias
+ |  0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.0.bias
+ | -0.000 | -0.036 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.2.bias
+ |  0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.0.bias
+ |  0.000 | -0.037 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.2.bias
+ | -0.000 | -0.031 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.16.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.16.bias
+ | -0.000 | -0.036 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.3.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.3.bias
+ | -0.000 | -0.035 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.6.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.6.bias
+ |  0.000 | -0.033 |  0.041 |  0.008 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.8.bias
+ |  0.000 | -0.027 |  0.025 |  0.008 | torch.Size([3, 64, 3, 3]) || model.10.weight
+
+23-01-31 07:01:34.220 :   task: msrresnet_psnr
+  model: plain
+  gpu_ids: [0]
+  dist: False
+  scale: 4
+  n_channels: 3
+  sigma: 0
+  sigma_test: 0
+  merge_bn: False
+  merge_bn_startpoint: 400000
+  path:[
+    root: superresolution
+    pretrained_netG: None
+    pretrained_netE: None
+    task: superresolution/msrresnet_psnr
+    log: superresolution/msrresnet_psnr
+    options: superresolution/msrresnet_psnr/options
+    models: superresolution/msrresnet_psnr/models
+    images: superresolution/msrresnet_psnr/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/trainH
+      dataroot_L: None
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 32
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/TestH
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  netG:[
+    net_type: msrresnet0
+    in_nc: 3
+    out_nc: 3
+    nc: 64
+    nb: 16
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: upconv
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: False
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200000, 400000, 600000, 800000, 1000000, 2000000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+  ]
+  opt_path: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/options/train_msrresnet_psnr.json
+  is_train: True
+  find_unused_parameters: True
+  use_static_graph: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+23-01-31 07:02:02.211 : Number of train images: 4,636, iters: 145
+23-01-31 07:02:17.015 : 
+Networks name: MSRResNet0
+Params number: 1332928
+Net structure:
+MSRResNet0(
+  (model): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): Identity + 
+    |Sequential(
+    |  (0): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (1): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (2): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (3): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (4): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (5): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (6): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (7): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (8): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (9): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (10): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (11): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (12): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (13): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (14): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (15): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (16): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |)
+    (2): Upsample(scale_factor=2.0, mode=nearest)
+    (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Upsample(scale_factor=2.0, mode=nearest)
+    (6): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): ReLU(inplace=True)
+    (10): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+)
+
+23-01-31 07:02:17.044 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ |  0.000 | -0.090 |  0.071 |  0.025 | torch.Size([64, 3, 3, 3]) || model.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.0.bias
+ |  0.000 | -0.031 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.0.bias
+ | -0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.2.bias
+ |  0.000 | -0.036 |  0.030 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.0.bias
+ |  0.000 | -0.037 |  0.039 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.2.bias
+ | -0.000 | -0.033 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.0.bias
+ |  0.000 | -0.033 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.2.bias
+ |  0.000 | -0.031 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.0.bias
+ | -0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.2.bias
+ | -0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.0.bias
+ | -0.000 | -0.033 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.2.bias
+ | -0.000 | -0.037 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.0.bias
+ | -0.000 | -0.037 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.2.bias
+ |  0.000 | -0.039 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.0.bias
+ |  0.000 | -0.033 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.2.bias
+ | -0.000 | -0.032 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.0.bias
+ | -0.000 | -0.036 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.2.bias
+ | -0.000 | -0.034 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.0.bias
+ |  0.000 | -0.034 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.2.bias
+ | -0.000 | -0.036 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.0.bias
+ | -0.000 | -0.034 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.2.bias
+ |  0.000 | -0.031 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.0.bias
+ |  0.000 | -0.032 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.2.bias
+ | -0.000 | -0.039 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.0.bias
+ | -0.000 | -0.034 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.2.bias
+ | -0.000 | -0.034 |  0.030 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.0.bias
+ | -0.000 | -0.036 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.2.bias
+ |  0.000 | -0.034 |  0.039 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.0.bias
+ | -0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.2.bias
+ | -0.000 | -0.034 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.0.bias
+ | -0.000 | -0.035 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.2.bias
+ |  0.000 | -0.033 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.0.bias
+ | -0.000 | -0.037 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.2.bias
+ |  0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.16.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.16.bias
+ | -0.000 | -0.035 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.3.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.3.bias
+ | -0.000 | -0.033 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.6.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.6.bias
+ | -0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.8.bias
+ |  0.000 | -0.025 |  0.030 |  0.008 | torch.Size([3, 64, 3, 3]) || model.10.weight
+
+23-01-31 07:06:24.527 :   task: msrresnet_psnr
+  model: plain
+  gpu_ids: [0]
+  dist: False
+  scale: 4
+  n_channels: 3
+  sigma: 0
+  sigma_test: 0
+  merge_bn: False
+  merge_bn_startpoint: 400000
+  path:[
+    root: superresolution
+    pretrained_netG: None
+    pretrained_netE: None
+    task: superresolution/msrresnet_psnr
+    log: superresolution/msrresnet_psnr
+    options: superresolution/msrresnet_psnr/options
+    models: superresolution/msrresnet_psnr/models
+    images: superresolution/msrresnet_psnr/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/trainH
+      dataroot_L: None
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 32
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/TestH
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  netG:[
+    net_type: msrresnet0
+    in_nc: 3
+    out_nc: 3
+    nc: 64
+    nb: 16
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: upconv
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: False
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200000, 400000, 600000, 800000, 1000000, 2000000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+  ]
+  opt_path: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/options/train_msrresnet_psnr.json
+  is_train: True
+  find_unused_parameters: True
+  use_static_graph: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+23-01-31 07:06:24.619 : Number of train images: 4,636, iters: 145
+23-01-31 07:06:29.835 : 
+Networks name: MSRResNet0
+Params number: 1332928
+Net structure:
+MSRResNet0(
+  (model): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): Identity + 
+    |Sequential(
+    |  (0): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (1): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (2): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (3): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (4): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (5): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (6): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (7): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (8): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (9): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (10): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (11): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (12): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (13): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (14): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (15): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (16): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |)
+    (2): Upsample(scale_factor=2.0, mode=nearest)
+    (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Upsample(scale_factor=2.0, mode=nearest)
+    (6): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): ReLU(inplace=True)
+    (10): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+)
+
+23-01-31 07:06:29.862 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ |  0.001 | -0.073 |  0.085 |  0.025 | torch.Size([64, 3, 3, 3]) || model.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.0.bias
+ | -0.000 | -0.033 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.0.bias
+ |  0.000 | -0.034 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.2.bias
+ |  0.000 | -0.036 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.0.bias
+ | -0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.2.bias
+ | -0.000 | -0.041 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.0.bias
+ | -0.000 | -0.038 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.2.bias
+ | -0.000 | -0.036 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.0.bias
+ | -0.000 | -0.034 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.2.bias
+ |  0.000 | -0.039 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.0.bias
+ |  0.000 | -0.035 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.2.bias
+ |  0.000 | -0.032 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.0.bias
+ | -0.000 | -0.033 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.2.bias
+ |  0.000 | -0.045 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.0.bias
+ | -0.000 | -0.039 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.2.bias
+ | -0.000 | -0.033 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.0.bias
+ | -0.000 | -0.031 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.2.bias
+ | -0.000 | -0.036 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.0.bias
+ | -0.000 | -0.037 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.2.bias
+ |  0.000 | -0.038 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.0.bias
+ |  0.000 | -0.031 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.2.bias
+ |  0.000 | -0.035 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.0.bias
+ |  0.000 | -0.036 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.2.bias
+ | -0.000 | -0.035 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.0.bias
+ |  0.000 | -0.034 |  0.043 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.2.bias
+ |  0.000 | -0.038 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.0.bias
+ |  0.000 | -0.041 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.2.bias
+ |  0.000 | -0.035 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.0.bias
+ | -0.000 | -0.035 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.2.bias
+ | -0.000 | -0.032 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.0.bias
+ | -0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.2.bias
+ |  0.000 | -0.033 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.0.bias
+ |  0.000 | -0.039 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.2.bias
+ | -0.000 | -0.037 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.16.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.16.bias
+ | -0.000 | -0.032 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.3.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.3.bias
+ | -0.000 | -0.034 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.6.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.6.bias
+ |  0.000 | -0.034 |  0.040 |  0.008 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.8.bias
+ |  0.000 | -0.026 |  0.025 |  0.008 | torch.Size([3, 64, 3, 3]) || model.10.weight
+
+23-01-31 07:09:43.004 :   task: msrresnet_psnr
+  model: plain
+  gpu_ids: [0]
+  dist: False
+  scale: 4
+  n_channels: 3
+  sigma: 0
+  sigma_test: 0
+  merge_bn: False
+  merge_bn_startpoint: 400000
+  path:[
+    root: superresolution
+    pretrained_netG: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/superresolution/msrresnet_psnr/models/msrresnet_x4_psnr.pth
+    pretrained_netE: None
+    task: superresolution/msrresnet_psnr
+    log: superresolution/msrresnet_psnr
+    options: superresolution/msrresnet_psnr/options
+    models: superresolution/msrresnet_psnr/models
+    images: superresolution/msrresnet_psnr/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/trainH
+      dataroot_L: None
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 32
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/TestH
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  netG:[
+    net_type: msrresnet0
+    in_nc: 3
+    out_nc: 3
+    nc: 64
+    nb: 16
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: upconv
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: False
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200000, 400000, 600000, 800000, 1000000, 2000000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+  ]
+  opt_path: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/options/train_msrresnet_psnr.json
+  is_train: True
+  find_unused_parameters: True
+  use_static_graph: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+23-01-31 07:09:43.098 : Number of train images: 4,636, iters: 145
+23-01-31 07:14:13.327 :   task: msrresnet_psnr
+  model: plain
+  gpu_ids: [0]
+  dist: False
+  scale: 4
+  n_channels: 3
+  sigma: 0
+  sigma_test: 0
+  merge_bn: False
+  merge_bn_startpoint: 400000
+  path:[
+    root: superresolution
+    pretrained_netG: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/superresolution/msrresnet_psnr/models/msrresnet_x4_psnr.pth
+    pretrained_netE: None
+    task: superresolution/msrresnet_psnr
+    log: superresolution/msrresnet_psnr
+    options: superresolution/msrresnet_psnr/options
+    models: superresolution/msrresnet_psnr/models
+    images: superresolution/msrresnet_psnr/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/trainH
+      dataroot_L: None
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 32
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/TestH
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  netG:[
+    net_type: msrresnet0
+    in_nc: 3
+    out_nc: 3
+    nc: 64
+    nb: 16
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: upconv
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: False
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200000, 400000, 600000, 800000, 1000000, 2000000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+  ]
+  opt_path: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/options/train_msrresnet_psnr.json
+  is_train: True
+  find_unused_parameters: True
+  use_static_graph: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+23-01-31 07:14:13.413 : Number of train images: 4,636, iters: 145
+23-01-31 11:38:05.345 :   task: msrresnet_psnr
+  model: plain
+  gpu_ids: [0]
+  dist: False
+  scale: 4
+  n_channels: 3
+  sigma: 0
+  sigma_test: 0
+  merge_bn: False
+  merge_bn_startpoint: 400000
+  path:[
+    root: superresolution
+    pretrained_netG: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/superresolution/msrresnet_psnr/models/msrresnet_x4_psnr.pth
+    pretrained_netE: None
+    task: superresolution/msrresnet_psnr
+    log: superresolution/msrresnet_psnr
+    options: superresolution/msrresnet_psnr/options
+    models: superresolution/msrresnet_psnr/models
+    images: superresolution/msrresnet_psnr/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/trainH
+      dataroot_L: None
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 32
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/TestH
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  netG:[
+    net_type: msrresnet0
+    in_nc: 3
+    out_nc: 3
+    nc: 64
+    nb: 16
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: upconv
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: False
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200000, 400000, 600000, 800000, 1000000, 2000000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+  ]
+  opt_path: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/options/train_msrresnet_psnr.json
+  is_train: True
+  find_unused_parameters: True
+  use_static_graph: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+23-01-31 11:38:36.373 : Number of train images: 4,636, iters: 145
+23-01-31 12:15:35.461 :   task: msrresnet_psnr
+  model: plain
+  gpu_ids: [0]
+  dist: False
+  scale: 4
+  n_channels: 3
+  sigma: 0
+  sigma_test: 0
+  merge_bn: False
+  merge_bn_startpoint: 400000
+  path:[
+    root: superresolution
+    pretrained_netG: None
+    pretrained_netE: None
+    task: superresolution/msrresnet_psnr
+    log: superresolution/msrresnet_psnr
+    options: superresolution/msrresnet_psnr/options
+    models: superresolution/msrresnet_psnr/models
+    images: superresolution/msrresnet_psnr/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/trainH
+      dataroot_L: None
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 32
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/TestH
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  netG:[
+    net_type: msrresnet0
+    in_nc: 3
+    out_nc: 3
+    nc: 64
+    nb: 16
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: upconv
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: False
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200000, 400000, 600000, 800000, 1000000, 2000000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+  ]
+  opt_path: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/options/train_msrresnet_psnr.json
+  is_train: True
+  find_unused_parameters: True
+  use_static_graph: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+23-01-31 12:15:35.534 : Number of train images: 4,636, iters: 145
+23-01-31 12:15:37.684 : 
+Networks name: MSRResNet0
+Params number: 1332928
+Net structure:
+MSRResNet0(
+  (model): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): Identity + 
+    |Sequential(
+    |  (0): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (1): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (2): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (3): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (4): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (5): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (6): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (7): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (8): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (9): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (10): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (11): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (12): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (13): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (14): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (15): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (16): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |)
+    (2): Upsample(scale_factor=2.0, mode=nearest)
+    (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Upsample(scale_factor=2.0, mode=nearest)
+    (6): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): ReLU(inplace=True)
+    (10): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+)
+
+23-01-31 12:15:37.700 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ |  0.000 | -0.076 |  0.084 |  0.025 | torch.Size([64, 3, 3, 3]) || model.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.0.bias
+ |  0.000 | -0.033 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.0.bias
+ | -0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.0.res.2.bias
+ |  0.000 | -0.035 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.0.bias
+ |  0.000 | -0.032 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.1.res.2.bias
+ | -0.000 | -0.031 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.0.bias
+ |  0.000 | -0.032 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.2.res.2.bias
+ |  0.000 | -0.036 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.0.bias
+ |  0.000 | -0.035 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.3.res.2.bias
+ | -0.000 | -0.031 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.0.bias
+ | -0.000 | -0.036 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.4.res.2.bias
+ |  0.000 | -0.033 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.0.bias
+ |  0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.5.res.2.bias
+ | -0.000 | -0.035 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.0.bias
+ |  0.000 | -0.035 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.6.res.2.bias
+ |  0.000 | -0.034 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.0.bias
+ | -0.000 | -0.035 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.7.res.2.bias
+ | -0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.0.bias
+ |  0.000 | -0.037 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.8.res.2.bias
+ | -0.000 | -0.035 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.0.bias
+ | -0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.9.res.2.bias
+ |  0.000 | -0.038 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.0.bias
+ |  0.000 | -0.036 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.10.res.2.bias
+ | -0.000 | -0.034 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.0.bias
+ | -0.000 | -0.033 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.11.res.2.bias
+ | -0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.0.bias
+ |  0.000 | -0.038 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.12.res.2.bias
+ | -0.000 | -0.033 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.0.bias
+ |  0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.13.res.2.bias
+ |  0.000 | -0.035 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.0.bias
+ |  0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.14.res.2.bias
+ |  0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.0.bias
+ | -0.000 | -0.031 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.15.res.2.bias
+ | -0.000 | -0.034 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.1.sub.16.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.1.sub.16.bias
+ | -0.000 | -0.031 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.3.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.3.bias
+ | -0.000 | -0.035 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.6.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.6.bias
+ |  0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.8.bias
+ | -0.000 | -0.031 |  0.026 |  0.008 | torch.Size([3, 64, 3, 3]) || model.10.weight
+
+23-01-31 12:29:25.856 : <epoch:  1, iter:     200, lr:1.000e-04> G_loss: 6.190e-02 
+23-01-31 12:38:26.156 : <epoch:  2, iter:     400, lr:1.000e-04> G_loss: 3.662e-02 
+23-01-31 12:47:31.607 : <epoch:  4, iter:     600, lr:1.000e-04> G_loss: 3.176e-02 
+23-01-31 12:56:46.313 : <epoch:  5, iter:     800, lr:1.000e-04> G_loss: 2.781e-02 
+23-01-31 13:05:57.019 : <epoch:  6, iter:   1,000, lr:1.000e-04> G_loss: 2.064e-02 
+23-01-31 13:14:56.858 : <epoch:  8, iter:   1,200, lr:1.000e-04> G_loss: 2.034e-02 
+23-01-31 13:23:57.992 : <epoch:  9, iter:   1,400, lr:1.000e-04> G_loss: 1.716e-02 
+23-01-31 13:32:59.997 : <epoch: 11, iter:   1,600, lr:1.000e-04> G_loss: 1.813e-02 
+23-01-31 13:42:16.722 : <epoch: 12, iter:   1,800, lr:1.000e-04> G_loss: 1.718e-02 
+23-01-31 13:51:24.885 : <epoch: 13, iter:   2,000, lr:1.000e-04> G_loss: 1.342e-02 
+23-01-31 14:00:22.055 : <epoch: 15, iter:   2,200, lr:1.000e-04> G_loss: 1.630e-02 
+23-01-31 14:09:30.034 : <epoch: 16, iter:   2,400, lr:1.000e-04> G_loss: 1.631e-02 
+23-01-31 14:18:32.108 : <epoch: 18, iter:   2,600, lr:1.000e-04> G_loss: 1.246e-02 
+23-01-31 14:27:33.441 : <epoch: 19, iter:   2,800, lr:1.000e-04> G_loss: 1.571e-02 
+23-01-31 14:36:44.434 : <epoch: 20, iter:   3,000, lr:1.000e-04> G_loss: 1.363e-02 
+23-01-31 14:45:37.371 : <epoch: 22, iter:   3,200, lr:1.000e-04> G_loss: 1.248e-02 
+23-01-31 14:54:37.252 : <epoch: 23, iter:   3,400, lr:1.000e-04> G_loss: 1.234e-02 
+23-01-31 15:03:27.493 : <epoch: 24, iter:   3,600, lr:1.000e-04> G_loss: 1.367e-02 
+23-01-31 15:12:25.288 : <epoch: 26, iter:   3,800, lr:1.000e-04> G_loss: 1.442e-02 
+23-01-31 15:21:33.205 : <epoch: 27, iter:   4,000, lr:1.000e-04> G_loss: 1.260e-02 
+23-01-31 15:30:36.085 : <epoch: 29, iter:   4,200, lr:1.000e-04> G_loss: 1.211e-02 
+23-01-31 15:39:46.709 : <epoch: 30, iter:   4,400, lr:1.000e-04> G_loss: 1.294e-02 
+23-01-31 15:48:51.947 : <epoch: 31, iter:   4,600, lr:1.000e-04> G_loss: 1.548e-02 
+23-01-31 15:57:50.409 : <epoch: 33, iter:   4,800, lr:1.000e-04> G_loss: 1.189e-02 
+23-01-31 16:07:03.815 : <epoch: 34, iter:   5,000, lr:1.000e-04> G_loss: 1.364e-02 
+23-01-31 16:07:03.824 : Saving the model.
+23-01-31 16:07:09.565 : ---1--> test4657.png | 33.55dB
+23-01-31 16:07:10.889 : ---2--> test4658.png | 33.01dB
+23-01-31 16:07:11.764 : ---3--> test4659.png | 32.63dB
+23-01-31 16:07:13.220 : ---4--> test4660.png | 32.34dB
+23-01-31 16:07:14.261 : ---5--> test4661.png | 32.36dB
+23-01-31 16:07:16.546 : ---6--> test4662.png | 31.26dB
+23-01-31 16:07:18.352 : ---7--> test4663.png | 30.41dB
+23-01-31 16:07:20.614 : ---8--> test4664.png | 31.48dB
+23-01-31 16:07:22.288 : ---9--> test4665.png | 33.58dB
+23-01-31 16:07:24.561 : --10--> test4666.png | 32.69dB
+23-01-31 16:07:25.421 : --11--> test4667.png | 32.19dB
+23-01-31 16:07:27.457 : --12--> test4668.png | 33.70dB
+23-01-31 16:07:30.957 : --13--> test4669.png | 33.02dB
+23-01-31 16:07:32.621 : --14--> test4670.png | 35.06dB
+23-01-31 16:07:35.664 : --15--> test4671.png | 33.82dB
+23-01-31 16:07:37.243 : --16--> test4672.png | 33.48dB
+23-01-31 16:07:38.810 : --17--> test4673.png | 33.16dB
+23-01-31 16:07:40.417 : --18--> test4674.png | 33.86dB
+23-01-31 16:07:42.323 : --19--> test4675.png | 33.60dB
+23-01-31 16:07:43.986 : --20--> test4676.png | 33.68dB
+23-01-31 16:07:44.868 : --21--> test4677.png | 33.23dB
+23-01-31 16:07:46.155 : --22--> test4678.png | 33.48dB
+23-01-31 16:07:46.899 : --23--> test4679.png | 33.49dB
+23-01-31 16:07:47.660 : --24--> test4680.png | 33.12dB
+23-01-31 16:07:49.338 : --25--> test4681.png | 33.00dB
+23-01-31 16:07:50.697 : --26--> test4682.png | 33.51dB
+23-01-31 16:07:51.419 : --27--> test4683.png | 34.49dB
+23-01-31 16:07:52.152 : --28--> test4684.png | 33.83dB
+23-01-31 16:07:52.910 : --29--> test4685.png | 34.31dB
+23-01-31 16:07:54.386 : --30--> test4686.png | 33.89dB
+23-01-31 16:07:55.462 : --31--> test4687.png | 32.27dB
+23-01-31 16:07:56.733 : --32--> test4688.png | 32.06dB
+23-01-31 16:07:57.391 : --33--> test4689.png | 33.33dB
+23-01-31 16:07:58.698 : --34--> test4690.png | 33.98dB
+23-01-31 16:07:59.978 : --35--> test4691.png | 33.13dB
+23-01-31 16:08:01.454 : --36--> test4692.png | 32.86dB
+23-01-31 16:08:02.276 : --37--> test4693.png | 32.46dB
+23-01-31 16:08:03.574 : --38--> test4694.png | 33.82dB
+23-01-31 16:08:05.036 : --39--> test4695.png | 34.05dB
+23-01-31 16:08:06.356 : --40--> test4696.png | 33.56dB
+23-01-31 16:08:07.762 : --41--> test4697.png | 33.51dB
+23-01-31 16:08:08.467 : --42--> test4698.png | 33.83dB
+23-01-31 16:08:09.203 : --43--> test4699.png | 34.62dB
+23-01-31 16:08:10.001 : --44--> test4700.png | 34.41dB
+23-01-31 16:08:10.743 : --45--> test4701.png | 33.75dB
+23-01-31 16:08:11.430 : --46--> test4702.png | 33.70dB
+23-01-31 16:08:13.057 : --47--> test4703.png | 35.43dB
+23-01-31 16:08:14.040 : --48--> test4704.png | 36.09dB
+23-01-31 16:08:14.759 : --49--> test4705.png | 36.77dB
+23-01-31 16:08:16.066 : --50--> test4706.png | 36.25dB
+23-01-31 16:08:17.439 : --51--> test4707.png | 35.80dB
+23-01-31 16:08:20.283 : --52--> test4708.png | 35.52dB
+23-01-31 16:08:21.563 : --53--> test4709.png | 35.86dB
+23-01-31 16:08:23.307 : --54--> test4710.png | 35.53dB
+23-01-31 16:08:24.388 : --55--> test4711.png | 35.40dB
+23-01-31 16:08:25.754 : --56--> test4712.png | 34.94dB
+23-01-31 16:08:27.283 : --57--> test4713.png | 34.72dB
+23-01-31 16:08:28.538 : --58--> test4714.png | 34.75dB
+23-01-31 16:08:31.330 : --59--> test4715.png | 34.39dB
+23-01-31 16:08:32.117 : --60--> test4716.png | 34.00dB
+23-01-31 16:08:33.512 : --61--> test4717.png | 34.04dB
+23-01-31 16:08:34.814 : --62--> test4718.png | 34.04dB
+23-01-31 16:08:36.012 : --63--> test4719.png | 34.19dB
+23-01-31 16:08:36.786 : --64--> test4720.png | 33.91dB
+23-01-31 16:08:38.091 : --65--> test4721.png | 33.10dB
+23-01-31 16:08:39.432 : --66--> test4722.png | 34.07dB
+23-01-31 16:08:40.588 : --67--> test4723.png | 34.27dB
+23-01-31 16:08:41.342 : --68--> test4724.png | 34.15dB
+23-01-31 16:08:42.359 : --69--> test4725.png | 34.67dB
+23-01-31 16:08:43.116 : --70--> test4726.png | 35.34dB
+23-01-31 16:08:44.741 : --71--> test4727.png | 35.19dB
+23-01-31 16:08:46.206 : --72--> test4728.png | 35.45dB
+23-01-31 16:08:48.965 : --73--> test4729.png | 36.12dB
+23-01-31 16:08:50.224 : --74--> test4730.png | 36.04dB
+23-01-31 16:08:51.837 : --75--> test4731.png | 34.89dB
+23-01-31 16:08:52.697 : --76--> test4732.png | 32.93dB
+23-01-31 16:08:53.605 : --77--> test4733.png | 33.05dB
+23-01-31 16:08:55.026 : --78--> test4734.png | 33.87dB
+23-01-31 16:08:56.723 : --79--> test4735.png | 34.01dB
+23-01-31 16:08:58.066 : --80--> test4736.png | 34.30dB
+23-01-31 16:08:58.827 : --81--> test4737.png | 34.14dB
+23-01-31 16:09:00.215 : --82--> test4738.png | 35.84dB
+23-01-31 16:09:01.436 : --83--> test4739.png | 36.65dB
+23-01-31 16:09:02.753 : --84--> test4740.png | 34.69dB
+23-01-31 16:09:05.177 : --85--> test4741.png | 33.75dB
+23-01-31 16:09:07.006 : --86--> test4742.png | 33.50dB
+23-01-31 16:09:07.738 : --87--> test4743.png | 33.50dB
+23-01-31 16:09:09.111 : --88--> test4744.png | 34.91dB
+23-01-31 16:09:10.595 : --89--> test4745.png | 34.73dB
+23-01-31 16:09:11.444 : --90--> test4746.png | 35.29dB
+23-01-31 16:09:12.354 : --91--> test4747.png | 36.10dB
+23-01-31 16:09:13.711 : --92--> test4748.png | 36.81dB
+23-01-31 16:09:15.065 : --93--> test4749.png | 36.48dB
+23-01-31 16:09:15.732 : --94--> test4750.png | 35.98dB
+23-01-31 16:09:18.116 : --95--> test4751.png | 35.18dB
+23-01-31 16:09:19.354 : --96--> test4752.png | 35.31dB
+23-01-31 16:09:20.174 : --97--> test4753.png | 35.78dB
+23-01-31 16:09:21.565 : --98--> test4754.png | 34.84dB
+23-01-31 16:09:22.847 : --99--> test4755.png | 34.42dB
+23-01-31 16:09:24.150 : -100--> test4756.png | 33.26dB
+23-01-31 16:09:25.471 : -101--> test4757.png | 33.20dB
+23-01-31 16:09:27.196 : -102--> test4758.png | 32.05dB
+23-01-31 16:09:27.974 : -103--> test4759.png | 32.78dB
+23-02-01 07:07:42.606 :   task: msrresnet_psnr
+  model: plain
+  gpu_ids: [0]
+  dist: False
+  scale: 4
+  n_channels: 3
+  sigma: 0
+  sigma_test: 0
+  merge_bn: False
+  merge_bn_startpoint: 400000
+  path:[
+    root: superresolution
+    pretrained_netG: superresolution/msrresnet_psnr/models/5000_G.pth
+    pretrained_netE: superresolution/msrresnet_psnr/models/5000_E.pth
+    task: superresolution/msrresnet_psnr
+    log: superresolution/msrresnet_psnr
+    options: superresolution/msrresnet_psnr/options
+    models: superresolution/msrresnet_psnr/models
+    images: superresolution/msrresnet_psnr/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/trainH
+      dataroot_L: None
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 32
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: sr
+      dataroot_H: /content/drive/MyDrive/URetinex-Net-main/demo/final_data/TestH
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  netG:[
+    net_type: msrresnet0
+    in_nc: 3
+    out_nc: 3
+    nc: 64
+    nb: 16
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: upconv
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: False
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200000, 400000, 600000, 800000, 1000000, 2000000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+  ]
+  opt_path: /content/drive/MyDrive/Super_Resolution_code/KAIR-master/options/train_msrresnet_psnr.json
+  is_train: True
+  find_unused_parameters: True
+  use_static_graph: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+23-02-01 07:07:42.736 : Number of train images: 4,636, iters: 145
+23-02-01 07:07:48.595 : 
+Networks name: MSRResNet0
+Params number: 1332928
+Net structure:
+MSRResNet0(
+  (model): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): Identity + 
+    |Sequential(
+    |  (0): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (1): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (2): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (3): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (4): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (5): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (6): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (7): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (8): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (9): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (10): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (11): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (12): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (13): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (14): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (15): ResBlock(
+    |    (res): Sequential(
+    |      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |      (1): ReLU(inplace=True)
+    |      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |    )
+    |  )
+    |  (16): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    |)
+    (2): Upsample(scale_factor=2.0, mode=nearest)
+    (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Upsample(scale_factor=2.0, mode=nearest)
+    (6): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): ReLU(inplace=True)
+    (10): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+)
+
+23-02-01 07:07:48.619 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.077 |  0.088 |  0.026 | torch.Size([64, 3, 3, 3]) || model.0.weight
+ | -0.001 | -0.012 |  0.008 |  0.003 | torch.Size([64]) || model.0.bias
+ |  0.000 | -0.112 |  0.100 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.0.weight
+ |  0.001 | -0.004 |  0.012 |  0.004 | torch.Size([64]) || model.1.sub.0.res.0.bias
+ | -0.000 | -0.067 |  0.069 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.0.res.2.weight
+ | -0.000 | -0.010 |  0.011 |  0.004 | torch.Size([64]) || model.1.sub.0.res.2.bias
+ |  0.000 | -0.090 |  0.079 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.0.weight
+ | -0.001 | -0.007 |  0.012 |  0.003 | torch.Size([64]) || model.1.sub.1.res.0.bias
+ | -0.000 | -0.093 |  0.076 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.1.res.2.weight
+ | -0.000 | -0.010 |  0.007 |  0.003 | torch.Size([64]) || model.1.sub.1.res.2.bias
+ |  0.000 | -0.060 |  0.082 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.0.weight
+ | -0.001 | -0.008 |  0.009 |  0.004 | torch.Size([64]) || model.1.sub.2.res.0.bias
+ | -0.000 | -0.077 |  0.085 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.2.res.2.weight
+ | -0.000 | -0.007 |  0.007 |  0.003 | torch.Size([64]) || model.1.sub.2.res.2.bias
+ |  0.000 | -0.100 |  0.134 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.0.weight
+ |  0.000 | -0.012 |  0.013 |  0.004 | torch.Size([64]) || model.1.sub.3.res.0.bias
+ | -0.000 | -0.147 |  0.155 |  0.011 | torch.Size([64, 64, 3, 3]) || model.1.sub.3.res.2.weight
+ | -0.000 | -0.007 |  0.008 |  0.003 | torch.Size([64]) || model.1.sub.3.res.2.bias
+ | -0.000 | -0.105 |  0.088 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.0.weight
+ | -0.000 | -0.017 |  0.018 |  0.005 | torch.Size([64]) || model.1.sub.4.res.0.bias
+ | -0.000 | -0.124 |  0.183 |  0.011 | torch.Size([64, 64, 3, 3]) || model.1.sub.4.res.2.weight
+ |  0.000 | -0.007 |  0.010 |  0.003 | torch.Size([64]) || model.1.sub.4.res.2.bias
+ | -0.000 | -0.080 |  0.100 |  0.009 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.0.weight
+ |  0.000 | -0.008 |  0.013 |  0.004 | torch.Size([64]) || model.1.sub.5.res.0.bias
+ | -0.000 | -0.105 |  0.126 |  0.011 | torch.Size([64, 64, 3, 3]) || model.1.sub.5.res.2.weight
+ | -0.000 | -0.009 |  0.014 |  0.003 | torch.Size([64]) || model.1.sub.5.res.2.bias
+ |  0.000 | -0.102 |  0.092 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.0.weight
+ |  0.000 | -0.008 |  0.015 |  0.004 | torch.Size([64]) || model.1.sub.6.res.0.bias
+ | -0.000 | -0.138 |  0.126 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.6.res.2.weight
+ | -0.000 | -0.010 |  0.011 |  0.003 | torch.Size([64]) || model.1.sub.6.res.2.bias
+ |  0.000 | -0.119 |  0.106 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.0.weight
+ |  0.001 | -0.006 |  0.012 |  0.004 | torch.Size([64]) || model.1.sub.7.res.0.bias
+ | -0.000 | -0.104 |  0.106 |  0.011 | torch.Size([64, 64, 3, 3]) || model.1.sub.7.res.2.weight
+ | -0.000 | -0.010 |  0.010 |  0.003 | torch.Size([64]) || model.1.sub.7.res.2.bias
+ |  0.000 | -0.151 |  0.084 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.0.weight
+ |  0.001 | -0.006 |  0.019 |  0.005 | torch.Size([64]) || model.1.sub.8.res.0.bias
+ | -0.000 | -0.155 |  0.148 |  0.012 | torch.Size([64, 64, 3, 3]) || model.1.sub.8.res.2.weight
+ | -0.000 | -0.010 |  0.012 |  0.003 | torch.Size([64]) || model.1.sub.8.res.2.bias
+ | -0.000 | -0.123 |  0.096 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.0.weight
+ |  0.001 | -0.003 |  0.011 |  0.003 | torch.Size([64]) || model.1.sub.9.res.0.bias
+ | -0.000 | -0.109 |  0.132 |  0.011 | torch.Size([64, 64, 3, 3]) || model.1.sub.9.res.2.weight
+ | -0.000 | -0.011 |  0.012 |  0.003 | torch.Size([64]) || model.1.sub.9.res.2.bias
+ |  0.000 | -0.081 |  0.087 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.0.weight
+ |  0.001 | -0.003 |  0.020 |  0.005 | torch.Size([64]) || model.1.sub.10.res.0.bias
+ | -0.000 | -0.114 |  0.112 |  0.011 | torch.Size([64, 64, 3, 3]) || model.1.sub.10.res.2.weight
+ | -0.000 | -0.010 |  0.014 |  0.004 | torch.Size([64]) || model.1.sub.10.res.2.bias
+ |  0.000 | -0.095 |  0.103 |  0.009 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.0.weight
+ |  0.000 | -0.009 |  0.020 |  0.004 | torch.Size([64]) || model.1.sub.11.res.0.bias
+ | -0.000 | -0.192 |  0.108 |  0.011 | torch.Size([64, 64, 3, 3]) || model.1.sub.11.res.2.weight
+ | -0.000 | -0.011 |  0.014 |  0.004 | torch.Size([64]) || model.1.sub.11.res.2.bias
+ | -0.000 | -0.172 |  0.157 |  0.011 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.0.weight
+ |  0.001 | -0.005 |  0.013 |  0.004 | torch.Size([64]) || model.1.sub.12.res.0.bias
+ | -0.000 | -0.199 |  0.192 |  0.013 | torch.Size([64, 64, 3, 3]) || model.1.sub.12.res.2.weight
+ | -0.000 | -0.008 |  0.012 |  0.003 | torch.Size([64]) || model.1.sub.12.res.2.bias
+ |  0.000 | -0.109 |  0.102 |  0.009 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.0.weight
+ |  0.001 | -0.005 |  0.025 |  0.004 | torch.Size([64]) || model.1.sub.13.res.0.bias
+ | -0.000 | -0.159 |  0.158 |  0.011 | torch.Size([64, 64, 3, 3]) || model.1.sub.13.res.2.weight
+ | -0.000 | -0.008 |  0.009 |  0.003 | torch.Size([64]) || model.1.sub.13.res.2.bias
+ |  0.000 | -0.104 |  0.116 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.0.weight
+ |  0.001 | -0.007 |  0.016 |  0.004 | torch.Size([64]) || model.1.sub.14.res.0.bias
+ | -0.000 | -0.155 |  0.172 |  0.012 | torch.Size([64, 64, 3, 3]) || model.1.sub.14.res.2.weight
+ | -0.000 | -0.009 |  0.008 |  0.003 | torch.Size([64]) || model.1.sub.14.res.2.bias
+ |  0.000 | -0.076 |  0.088 |  0.009 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.0.weight
+ |  0.000 | -0.004 |  0.008 |  0.003 | torch.Size([64]) || model.1.sub.15.res.0.bias
+ | -0.000 | -0.203 |  0.211 |  0.010 | torch.Size([64, 64, 3, 3]) || model.1.sub.15.res.2.weight
+ |  0.000 | -0.009 |  0.008 |  0.003 | torch.Size([64]) || model.1.sub.15.res.2.bias
+ | -0.000 | -0.066 |  0.068 |  0.009 | torch.Size([64, 64, 3, 3]) || model.1.sub.16.weight
+ | -0.002 | -0.022 |  0.023 |  0.009 | torch.Size([64]) || model.1.sub.16.bias
+ | -0.000 | -0.089 |  0.085 |  0.011 | torch.Size([64, 64, 3, 3]) || model.3.weight
+ |  0.011 |  0.005 |  0.036 |  0.006 | torch.Size([64]) || model.3.bias
+ |  0.001 | -0.218 |  0.180 |  0.015 | torch.Size([64, 64, 3, 3]) || model.6.weight
+ |  0.010 | -0.001 |  0.034 |  0.007 | torch.Size([64]) || model.6.bias
+ |  0.001 | -0.229 |  0.249 |  0.016 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ |  0.008 | -0.012 |  0.046 |  0.010 | torch.Size([64]) || model.8.bias
+ |  0.005 | -0.057 |  0.228 |  0.018 | torch.Size([3, 64, 3, 3]) || model.10.weight
+
+23-02-01 07:17:46.828 : <epoch:  1, iter:   5,200, lr:1.000e-04> G_loss: 1.405e-02 
+23-02-01 07:26:56.316 : <epoch:  2, iter:   5,400, lr:1.000e-04> G_loss: 1.477e-02 
+23-02-01 07:36:06.415 : <epoch:  4, iter:   5,600, lr:1.000e-04> G_loss: 1.377e-02 
+23-02-01 07:45:12.453 : <epoch:  5, iter:   5,800, lr:1.000e-04> G_loss: 1.251e-02 
+23-02-01 07:54:13.721 : <epoch:  6, iter:   6,000, lr:1.000e-04> G_loss: 1.162e-02 
+23-02-01 08:03:13.989 : <epoch:  8, iter:   6,200, lr:1.000e-04> G_loss: 1.299e-02 
+23-02-01 08:12:18.937 : <epoch:  9, iter:   6,400, lr:1.000e-04> G_loss: 1.209e-02 
+23-02-01 08:21:25.855 : <epoch: 11, iter:   6,600, lr:1.000e-04> G_loss: 1.198e-02 
+23-02-01 08:30:32.125 : <epoch: 12, iter:   6,800, lr:1.000e-04> G_loss: 1.130e-02 
+23-02-01 08:39:28.864 : <epoch: 13, iter:   7,000, lr:1.000e-04> G_loss: 1.352e-02 
+23-02-01 08:48:24.505 : <epoch: 15, iter:   7,200, lr:1.000e-04> G_loss: 1.464e-02 
+23-02-01 08:57:20.956 : <epoch: 16, iter:   7,400, lr:1.000e-04> G_loss: 1.275e-02 
+23-02-01 09:06:21.186 : <epoch: 18, iter:   7,600, lr:1.000e-04> G_loss: 1.189e-02 
+23-02-01 09:15:20.036 : <epoch: 19, iter:   7,800, lr:1.000e-04> G_loss: 1.394e-02 
+23-02-01 09:24:12.099 : <epoch: 20, iter:   8,000, lr:1.000e-04> G_loss: 1.347e-02 
+23-02-01 09:33:07.018 : <epoch: 22, iter:   8,200, lr:1.000e-04> G_loss: 1.301e-02 
+23-02-01 09:41:58.948 : <epoch: 23, iter:   8,400, lr:1.000e-04> G_loss: 1.133e-02 
+23-02-01 09:50:47.028 : <epoch: 24, iter:   8,600, lr:1.000e-04> G_loss: 1.186e-02 
+23-02-01 09:59:45.069 : <epoch: 26, iter:   8,800, lr:1.000e-04> G_loss: 1.289e-02 
+23-02-01 10:08:34.194 : <epoch: 27, iter:   9,000, lr:1.000e-04> G_loss: 1.356e-02 
+23-02-01 10:17:15.136 : <epoch: 29, iter:   9,200, lr:1.000e-04> G_loss: 1.262e-02 
+23-02-01 10:26:05.770 : <epoch: 30, iter:   9,400, lr:1.000e-04> G_loss: 1.093e-02 
+23-02-01 10:35:00.611 : <epoch: 31, iter:   9,600, lr:1.000e-04> G_loss: 1.188e-02 
+23-02-01 10:43:42.458 : <epoch: 33, iter:   9,800, lr:1.000e-04> G_loss: 1.298e-02 
+23-02-01 10:52:23.132 : <epoch: 34, iter:  10,000, lr:1.000e-04> G_loss: 1.372e-02 
+23-02-01 10:52:23.147 : Saving the model.
+23-02-01 10:52:27.756 : ---1--> test4657.png | 34.24dB
+23-02-01 10:52:29.022 : ---2--> test4658.png | 33.72dB
+23-02-01 10:52:30.036 : ---3--> test4659.png | 33.38dB
+23-02-01 10:52:31.367 : ---4--> test4660.png | 33.19dB
+23-02-01 10:52:32.309 : ---5--> test4661.png | 33.21dB
+23-02-01 10:52:33.430 : ---6--> test4662.png | 32.05dB
+23-02-01 10:52:34.547 : ---7--> test4663.png | 31.05dB
+23-02-01 10:52:35.641 : ---8--> test4664.png | 32.11dB
+23-02-01 10:52:36.706 : ---9--> test4665.png | 34.24dB
+23-02-01 10:52:37.805 : --10--> test4666.png | 33.39dB
+23-02-01 10:52:38.807 : --11--> test4667.png | 32.73dB
+23-02-01 10:52:39.917 : --12--> test4668.png | 34.27dB
+23-02-01 10:52:40.734 : --13--> test4669.png | 33.66dB
+23-02-01 10:52:41.946 : --14--> test4670.png | 35.70dB
+23-02-01 10:52:42.885 : --15--> test4671.png | 34.50dB
+23-02-01 10:52:43.885 : --16--> test4672.png | 34.17dB
+23-02-01 10:52:45.058 : --17--> test4673.png | 33.87dB
+23-02-01 10:52:46.159 : --18--> test4674.png | 34.49dB
+23-02-01 10:52:47.309 : --19--> test4675.png | 34.25dB
+23-02-01 10:52:48.547 : --20--> test4676.png | 34.33dB
+23-02-01 10:52:49.580 : --21--> test4677.png | 33.91dB
+23-02-01 10:52:50.756 : --22--> test4678.png | 34.18dB
+23-02-01 10:52:51.822 : --23--> test4679.png | 34.20dB
+23-02-01 10:52:53.012 : --24--> test4680.png | 33.80dB
+23-02-01 10:52:53.902 : --25--> test4681.png | 33.74dB
+23-02-01 10:52:54.761 : --26--> test4682.png | 34.18dB
+23-02-01 10:52:55.838 : --27--> test4683.png | 35.12dB
+23-02-01 10:52:56.964 : --28--> test4684.png | 34.49dB
+23-02-01 10:52:58.103 : --29--> test4685.png | 34.95dB
+23-02-01 10:52:59.028 : --30--> test4686.png | 34.54dB
+23-02-01 10:52:59.920 : --31--> test4687.png | 32.73dB
+23-02-01 10:53:01.063 : --32--> test4688.png | 32.62dB
+23-02-01 10:53:02.013 : --33--> test4689.png | 33.98dB
+23-02-01 10:53:02.987 : --34--> test4690.png | 34.65dB
+23-02-01 10:53:04.073 : --35--> test4691.png | 33.81dB
+23-02-01 10:53:04.991 : --36--> test4692.png | 33.65dB
+23-02-01 10:53:05.975 : --37--> test4693.png | 33.24dB
+23-02-01 10:53:06.926 : --38--> test4694.png | 34.51dB
+23-02-01 10:53:07.879 : --39--> test4695.png | 34.73dB
+23-02-01 10:53:08.417 : --40--> test4696.png | 34.21dB
+23-02-01 10:53:09.148 : --41--> test4697.png | 34.05dB
+23-02-01 10:53:09.878 : --42--> test4698.png | 34.44dB
+23-02-01 10:53:10.278 : --43--> test4699.png | 35.25dB
+23-02-01 10:53:10.558 : --44--> test4700.png | 35.15dB
+23-02-01 10:53:10.772 : --45--> test4701.png | 34.54dB
+23-02-01 10:53:10.984 : --46--> test4702.png | 34.46dB
+23-02-01 10:53:11.201 : --47--> test4703.png | 36.12dB
+23-02-01 10:53:11.418 : --48--> test4704.png | 36.79dB
+23-02-01 10:53:11.634 : --49--> test4705.png | 37.46dB
+23-02-01 10:53:11.856 : --50--> test4706.png | 36.97dB
+23-02-01 10:53:12.071 : --51--> test4707.png | 36.54dB
+23-02-01 10:53:12.293 : --52--> test4708.png | 36.22dB
+23-02-01 10:53:12.544 : --53--> test4709.png | 36.53dB
+23-02-01 10:53:12.764 : --54--> test4710.png | 36.22dB
+23-02-01 10:53:12.974 : --55--> test4711.png | 36.08dB
+23-02-01 10:53:13.211 : --56--> test4712.png | 35.65dB
+23-02-01 10:53:13.425 : --57--> test4713.png | 35.45dB
+23-02-01 10:53:13.645 : --58--> test4714.png | 35.47dB
+23-02-01 10:53:13.879 : --59--> test4715.png | 35.14dB
+23-02-01 10:53:14.095 : --60--> test4716.png | 34.71dB
+23-02-01 10:53:14.313 : --61--> test4717.png | 34.73dB
+23-02-01 10:53:14.525 : --62--> test4718.png | 34.81dB
+23-02-01 10:53:14.743 : --63--> test4719.png | 34.95dB
+23-02-01 10:53:14.961 : --64--> test4720.png | 34.68dB
+23-02-01 10:53:15.180 : --65--> test4721.png | 33.89dB
+23-02-01 10:53:15.399 : --66--> test4722.png | 34.88dB
+23-02-01 10:53:15.640 : --67--> test4723.png | 35.00dB
+23-02-01 10:53:15.879 : --68--> test4724.png | 34.94dB
+23-02-01 10:53:16.093 : --69--> test4725.png | 35.30dB
+23-02-01 10:53:16.310 : --70--> test4726.png | 36.07dB
+23-02-01 10:53:16.528 : --71--> test4727.png | 35.91dB
+23-02-01 10:53:16.761 : --72--> test4728.png | 36.20dB
+23-02-01 10:53:17.015 : --73--> test4729.png | 36.87dB
+23-02-01 10:53:17.304 : --74--> test4730.png | 36.80dB
+23-02-01 10:53:17.522 : --75--> test4731.png | 35.52dB
+23-02-01 10:53:17.760 : --76--> test4732.png | 33.64dB
+23-02-01 10:53:17.972 : --77--> test4733.png | 33.77dB
+23-02-01 10:53:18.197 : --78--> test4734.png | 34.61dB
+23-02-01 10:53:18.426 : --79--> test4735.png | 34.76dB
+23-02-01 10:53:18.660 : --80--> test4736.png | 35.06dB
+23-02-01 10:53:18.873 : --81--> test4737.png | 34.89dB
+23-02-01 10:53:19.082 : --82--> test4738.png | 36.51dB
+23-02-01 10:53:19.296 : --83--> test4739.png | 37.32dB
+23-02-01 10:53:19.528 : --84--> test4740.png | 35.43dB
+23-02-01 10:53:19.756 : --85--> test4741.png | 34.51dB
+23-02-01 10:53:19.969 : --86--> test4742.png | 34.27dB
+23-02-01 10:53:20.215 : --87--> test4743.png | 34.13dB
+23-02-01 10:53:20.450 : --88--> test4744.png | 35.60dB
+23-02-01 10:53:20.672 : --89--> test4745.png | 35.34dB
+23-02-01 10:53:20.906 : --90--> test4746.png | 35.96dB
+23-02-01 10:53:21.116 : --91--> test4747.png | 36.79dB
+23-02-01 10:53:21.332 : --92--> test4748.png | 37.46dB
+23-02-01 10:53:21.563 : --93--> test4749.png | 37.17dB
+23-02-01 10:53:21.777 : --94--> test4750.png | 36.57dB
+23-02-01 10:53:21.994 : --95--> test4751.png | 35.85dB
+23-02-01 10:53:22.247 : --96--> test4752.png | 35.92dB
+23-02-01 10:53:22.460 : --97--> test4753.png | 36.45dB
+23-02-01 10:53:22.683 : --98--> test4754.png | 35.46dB
+23-02-01 10:53:22.896 : --99--> test4755.png | 35.12dB
+23-02-01 10:53:23.111 : -100--> test4756.png | 34.00dB
+23-02-01 10:53:23.325 : -101--> test4757.png | 33.87dB
+23-02-01 10:53:23.585 : -102--> test4758.png | 32.77dB
+23-02-01 10:53:23.788 : -103--> test4759.png | 33.58dB
+23-02-01 10:53:23.988 : -104--> test4760.png | 34.07dB
+23-02-01 10:53:24.545 : -105--> test4761.png | 34.71dB
+23-02-01 10:53:25.722 : -106--> test4762.png | 35.13dB
+23-02-01 10:53:27.997 : -107--> test4763.png | 33.99dB
+23-02-01 10:53:30.228 : -108--> test4764.png | 34.70dB
+23-02-01 10:53:32.386 : -109--> test4765.png | 35.46dB
+23-02-01 10:53:34.927 : -110--> test4766.png | 35.99dB
+23-02-01 10:53:37.122 : -111--> test4767.png | 36.83dB
+23-02-01 10:53:38.553 : -112--> test4768.png | 36.96dB
+23-02-01 10:53:40.781 : -113--> test4769.png | 35.94dB
+23-02-01 10:53:41.407 : -114--> test4770.png | 35.95dB
+23-02-01 10:53:43.890 : -115--> test4771.png | 38.03dB
+23-02-01 10:53:45.045 : -116--> test4772.png | 37.11dB
+23-02-01 10:53:47.618 : -117--> test4773.png | 36.10dB
+23-02-01 10:53:48.287 : -118--> test4774.png | 34.93dB
+23-02-01 10:53:51.412 : -119--> test4775.png | 36.27dB
+23-02-01 10:53:53.605 : -120--> test4776.png | 34.97dB
+23-02-01 10:53:55.704 : -121--> test4777.png | 34.76dB
+23-02-01 10:53:57.321 : -122--> test4778.png | 35.55dB
+23-02-01 10:53:59.564 : -123--> test4779.png | 34.32dB
+23-02-01 10:54:00.161 : -124--> test4780.png | 35.39dB
+23-02-01 10:54:02.667 : -125--> test4781.png | 34.19dB
+23-02-01 10:54:04.326 : -126--> test4782.png | 33.30dB
+23-02-01 10:54:06.505 : -127--> test4783.png | 34.32dB
+23-02-01 10:54:07.714 : -128--> test4784.png | 35.98dB
+23-02-01 10:54:08.929 : -129--> test4785.png | 34.53dB
+23-02-01 10:54:09.959 : -130--> test4786.png | 33.35dB
+23-02-01 10:54:11.354 : -131--> test4787.png | 33.32dB
+23-02-01 10:54:12.396 : -132--> test4788.png | 34.72dB
+23-02-01 10:54:13.604 : -133--> test4789.png | 35.60dB
+23-02-01 10:54:15.363 : -134--> test4790.png | 35.54dB
+23-02-01 10:54:18.521 : -135--> test4791.png | 34.88dB
+23-02-01 10:54:19.775 : -136--> test4792.png | 34.38dB
+23-02-01 10:54:21.413 : -137--> test4793.png | 35.14dB
+23-02-01 10:54:23.601 : -138--> test4794.png | 34.87dB
+23-02-01 10:54:25.773 : -139--> test4795.png | 35.47dB
+23-02-01 10:54:27.947 : -140--> test4796.png | 34.96dB
+23-02-01 10:54:30.107 : -141--> test4797.png | 35.32dB
+23-02-01 10:54:32.290 : -142--> test4798.png | 36.17dB
+23-02-01 10:54:33.907 : -143--> test4799.png | 36.49dB
+23-02-01 10:54:35.072 : -144--> test4800.png | 36.53dB
+23-02-01 10:54:36.300 : -145--> test4801.png | 36.16dB
+23-02-01 10:54:37.115 : -146--> test4802.png | 35.92dB
+23-02-01 10:54:38.277 : -147--> test4803.png | 36.64dB
+23-02-01 10:54:39.066 : -148--> test4804.png | 35.93dB
+23-02-01 10:54:40.242 : -149--> test4805.png | 35.31dB
+23-02-01 10:54:40.887 : -150--> test4806.png | 35.36dB
+23-02-01 10:54:42.065 : -151--> test4807.png | 33.75dB
+23-02-01 10:54:44.270 : -152--> test4808.png | 34.09dB
+23-02-01 10:54:45.925 : -153--> test4809.png | 34.70dB
+23-02-01 10:54:47.214 : -154--> test4810.png | 34.99dB
+23-02-01 10:54:47.968 : -155--> test4811.png | 34.21dB
+23-02-01 10:54:49.170 : -156--> test4812.png | 34.84dB
+23-02-01 10:54:50.189 : -157--> test4813.png | 34.45dB
+23-02-01 10:54:52.412 : -158--> test4814.png | 34.39dB
+23-02-01 10:54:53.568 : -159--> test4815.png | 34.33dB
+23-02-01 10:54:55.183 : -160--> test4816.png | 34.03dB
+23-02-01 10:55:05.665 : -161--> test4817.png | 46.03dB
+23-02-01 10:55:09.141 : -162--> test4818.png | 46.04dB
+23-02-01 10:55:12.684 : -163--> test4819.png | 46.42dB
+23-02-01 10:55:15.715 : -164--> test4820.png | 46.56dB
+23-02-01 10:55:18.806 : -165--> test4821.png | 46.73dB
+23-02-01 10:55:21.846 : -166--> test4822.png | 46.82dB
+23-02-01 10:55:26.427 : -167--> test4823.png | 46.54dB
+23-02-01 10:55:30.384 : -168--> test4824.png | 45.89dB
+23-02-01 10:55:34.360 : -169--> test4825.png | 45.83dB
+23-02-01 10:55:38.483 : -170--> test4826.png | 46.06dB
+23-02-01 10:55:42.580 : -171--> test4827.png | 45.91dB
+23-02-01 10:55:46.107 : -172--> test4828.png | 46.02dB
+23-02-01 10:55:49.829 : -173--> test4829.png | 45.64dB
+23-02-01 10:55:54.243 : -174--> test4830.png | 46.23dB
+23-02-01 10:55:58.411 : -175--> test4831.png | 46.07dB
+23-02-01 10:56:02.037 : -176--> test4832.png | 45.17dB
+23-02-01 10:56:05.370 : -177--> test4833.png | 45.38dB
+23-02-01 10:56:09.850 : -178--> test4834.png | 44.23dB
+23-02-01 10:56:14.693 : -179--> test4835.png | 45.02dB
+23-02-01 10:56:19.229 : -180--> test4836.png | 44.85dB
+23-02-01 10:56:23.582 : -181--> test4837.png | 44.83dB
+23-02-01 10:56:26.797 : -182--> test4838.png | 45.14dB
+23-02-01 10:56:30.151 : -183--> test4839.png | 45.22dB
+23-02-01 10:56:34.605 : -184--> test4840.png | 45.53dB
+23-02-01 10:56:38.235 : -185--> test4841.png | 45.70dB
+23-02-01 10:56:42.136 : -186--> test4842.png | 45.81dB
+23-02-01 10:56:46.502 : -187--> test4843.png | 46.21dB
+23-02-01 10:56:50.200 : -188--> test4844.png | 46.22dB
+23-02-01 10:56:53.869 : -189--> test4845.png | 46.07dB
+23-02-01 10:56:57.767 : -190--> test4846.png | 45.83dB
+23-02-01 10:57:01.225 : -191--> test4847.png | 44.97dB
+23-02-01 10:57:04.855 : -192--> test4848.png | 45.66dB
+23-02-01 10:57:08.561 : -193--> test4849.png | 46.32dB
+23-02-01 10:57:12.049 : -194--> test4850.png | 46.35dB
+23-02-01 10:57:16.363 : -195--> test4851.png | 46.31dB
+23-02-01 10:57:19.926 : -196--> test4852.png | 45.87dB
+23-02-01 10:57:23.288 : -197--> test4853.png | 45.62dB
+23-02-01 10:57:27.000 : -198--> test4854.png | 45.99dB
+23-02-01 10:57:30.628 : -199--> test4855.png | 46.40dB
+23-02-01 10:57:34.140 : -200--> test4856.png | 46.41dB
+23-02-01 10:57:37.707 : -201--> test4857.png | 45.94dB
+23-02-01 10:57:41.187 : -202--> test4858.png | 46.19dB
+23-02-01 10:57:45.282 : -203--> test4859.png | 46.34dB
+23-02-01 10:57:49.314 : -204--> test4860.png | 46.38dB
+23-02-01 10:57:53.538 : -205--> test4861.png | 46.51dB
+23-02-01 10:57:56.847 : -206--> test4862.png | 46.28dB
+23-02-01 10:58:01.173 : -207--> test4863.png | 46.16dB
+23-02-01 10:58:04.780 : -208--> test4864.png | 45.78dB
+23-02-01 10:58:08.539 : -209--> test4865.png | 46.08dB
+23-02-01 10:58:12.121 : -210--> test4866.png | 46.01dB
+23-02-01 10:58:16.127 : -211--> test4867.png | 45.24dB
+23-02-01 10:58:19.408 : -212--> test4868.png | 45.36dB
+23-02-01 10:58:22.926 : -213--> test4869.png | 44.79dB
+23-02-01 10:58:26.571 : -214--> test4870.png | 44.58dB
+23-02-01 10:58:30.044 : -215--> test4871.png | 44.81dB
+23-02-01 10:58:34.103 : -216--> test4872.png | 43.51dB
+23-02-01 10:58:38.090 : -217--> test4873.png | 45.35dB
+23-02-01 10:58:43.478 : -218--> test4874.png | 46.11dB
+23-02-01 10:58:46.771 : -219--> test4875.png | 45.95dB
+23-02-01 10:58:51.319 : -220--> test4876.png | 46.48dB
+23-02-01 10:58:54.474 : -221--> test4877.png | 46.67dB
+23-02-01 10:58:59.533 : -222--> test4878.png | 46.48dB
+23-02-01 10:59:03.099 : -223--> test4879.png | 46.47dB
+23-02-01 10:59:06.214 : -224--> test4880.png | 46.08dB
+23-02-01 10:59:11.385 : -225--> test4881.png | 46.31dB
+23-02-01 10:59:14.909 : -226--> test4882.png | 46.77dB
+23-02-01 10:59:18.782 : -227--> test4883.png | 45.81dB
+23-02-01 10:59:21.934 : -228--> test4884.png | 45.51dB
+23-02-01 10:59:26.699 : -229--> test4885.png | 45.70dB
+23-02-01 10:59:30.615 : -230--> test4886.png | 44.53dB
+23-02-01 10:59:34.568 : -231--> test4887.png | 45.23dB
+23-02-01 10:59:38.780 : -232--> test4888.png | 46.02dB
+23-02-01 10:59:42.766 : -233--> test4889.png | 45.90dB
+23-02-01 10:59:47.162 : -234--> test4890.png | 46.13dB
+23-02-01 10:59:50.798 : -235--> test4891.png | 46.38dB
+23-02-01 10:59:54.293 : -236--> test4892.png | 45.69dB
+23-02-01 10:59:58.581 : -237--> test4893.png | 44.71dB
+23-02-01 11:00:02.283 : -238--> test4894.png | 43.32dB
+23-02-01 11:00:05.876 : -239--> test4895.png | 45.45dB
+23-02-01 11:00:09.778 : -240--> test4896.png | 45.73dB
+23-02-01 11:00:13.343 : -241--> test4897.png | 44.61dB
+23-02-01 11:00:16.808 : -242--> test4898.png | 44.85dB
+23-02-01 11:00:20.341 : -243--> test4899.png | 46.25dB
+23-02-01 11:00:24.092 : -244--> test4900.png | 46.56dB
+23-02-01 11:00:27.664 : -245--> test4901.png | 46.40dB
+23-02-01 11:00:31.193 : -246--> test4902.png | 45.76dB
+23-02-01 11:00:34.645 : -247--> test4903.png | 45.56dB
+23-02-01 11:00:38.066 : -248--> test4904.png | 45.70dB
+23-02-01 11:00:41.591 : -249--> test4905.png | 45.91dB
+23-02-01 11:00:45.468 : -250--> test4906.png | 46.26dB
+23-02-01 11:00:48.695 : -251--> test4907.png | 45.99dB
+23-02-01 11:00:53.755 : -252--> test4908.png | 45.93dB
+23-02-01 11:00:57.378 : -253--> test4909.png | 45.86dB
+23-02-01 11:01:00.823 : -254--> test4910.png | 45.15dB
+23-02-01 11:01:05.161 : -255--> test4911.png | 45.31dB
+23-02-01 11:01:08.768 : -256--> test4912.png | 45.99dB
+23-02-01 11:01:12.243 : -257--> test4913.png | 45.98dB
+23-02-01 11:01:15.958 : -258--> test4914.png | 46.48dB
+23-02-01 11:01:19.251 : -259--> test4915.png | 46.08dB
+23-02-01 11:01:19.522 : -260--> test4916.png | 33.69dB
+23-02-01 11:01:19.734 : -261--> test4917.png | 33.83dB
+23-02-01 11:01:20.172 : -262--> test4918.png | 34.08dB
+23-02-01 11:01:22.396 : -263--> test4919.png | 35.04dB
+23-02-01 11:01:23.587 : -264--> test4920.png | 35.27dB
+23-02-01 11:01:24.454 : -265--> test4921.png | 34.38dB
+23-02-01 11:01:25.728 : -266--> test4922.png | 33.50dB
+23-02-01 11:01:26.731 : -267--> test4923.png | 33.94dB
+23-02-01 11:01:27.915 : -268--> test4924.png | 34.40dB
+23-02-01 11:01:29.453 : -269--> test4925.png | 33.71dB
+23-02-01 11:01:31.245 : -270--> test4926.png | 33.38dB
+23-02-01 11:01:32.476 : -271--> test4927.png | 34.50dB
+23-02-01 11:01:34.736 : -272--> test4928.png | 34.25dB
+23-02-01 11:01:35.914 : -273--> test4929.png | 34.75dB
+23-02-01 11:01:36.978 : -274--> test4930.png | 34.41dB
+23-02-01 11:01:38.112 : -275--> test4931.png | 35.39dB
+23-02-01 11:01:39.400 : -276--> test4932.png | 35.93dB
+23-02-01 11:01:40.938 : -277--> test4933.png | 36.18dB
+23-02-01 11:01:41.627 : -278--> test4934.png | 35.72dB
+23-02-01 11:01:42.279 : -279--> test4935.png | 35.59dB
+23-02-01 11:01:42.953 : -280--> test4936.png | 34.99dB
+23-02-01 11:01:43.632 : -281--> test4937.png | 34.28dB
+23-02-01 11:01:44.317 : -282--> test4938.png | 33.22dB
+23-02-01 11:01:46.562 : -283--> test4939.png | 33.34dB
+23-02-01 11:01:47.746 : -284--> test4940.png | 34.46dB
+23-02-01 11:01:48.813 : -285--> test4941.png | 33.93dB
+23-02-01 11:01:49.997 : -286--> test4942.png | 34.51dB
+23-02-01 11:01:51.184 : -287--> test4943.png | 34.52dB
+23-02-01 11:01:52.403 : -288--> test4944.png | 35.00dB
+23-02-01 11:01:53.608 : -289--> test4945.png | 35.43dB
+23-02-01 11:01:54.732 : -290--> test4946.png | 35.26dB
+23-02-01 11:01:55.973 : -291--> test4947.png | 34.86dB
+23-02-01 11:01:57.229 : -292--> test4948.png | 35.21dB
+23-02-01 11:01:57.882 : -293--> test4949.png | 34.49dB
+23-02-01 11:02:00.159 : -294--> test4950.png | 34.92dB
+23-02-01 11:02:01.353 : -295--> test4951.png | 35.92dB
+23-02-01 11:02:02.335 : -296--> test4952.png | 36.14dB
+23-02-01 11:02:03.585 : -297--> test4953.png | 36.27dB
+23-02-01 11:02:04.295 : -298--> test4954.png | 36.56dB
+23-02-01 11:02:05.250 : -299--> test4955.png | 36.00dB
+23-02-01 11:02:06.444 : -300--> test4956.png | 35.72dB
+23-02-01 11:02:07.668 : -301--> test4957.png | 35.43dB
+23-02-01 11:02:08.912 : -302--> test4958.png | 34.98dB
+23-02-01 11:02:10.523 : -303--> test4959.png | 35.23dB
+23-02-01 11:02:11.193 : -304--> test4960.png | 34.83dB
+23-02-01 11:02:12.399 : -305--> test4961.png | 35.47dB
+23-02-01 11:02:13.688 : -306--> test4962.png | 34.53dB
+23-02-01 11:02:15.298 : -307--> test4963.png | 34.22dB
+23-02-01 11:02:15.949 : -308--> test4964.png | 34.26dB
+23-02-01 11:02:17.190 : -309--> test4965.png | 36.27dB
+23-02-01 11:02:18.469 : -310--> test4966.png | 36.97dB
+23-02-01 11:02:19.576 : -311--> test4967.png | 34.92dB
+23-02-01 11:02:20.241 : -312--> test4968.png | 33.27dB
+23-02-01 11:02:21.710 : -313--> test4969.png | 33.24dB
+23-02-01 11:02:24.005 : -314--> test4970.png | 33.42dB
+23-02-01 11:02:25.212 : -315--> test4971.png | 33.64dB
+23-02-01 11:02:26.403 : -316--> test4972.png | 33.80dB
+23-02-01 11:02:27.427 : -317--> test4973.png | 34.82dB
+23-02-01 11:02:28.103 : -318--> test4974.png | 35.37dB
+23-02-01 11:02:29.855 : -319--> test4975.png | 36.20dB
+23-02-01 11:02:31.148 : -320--> test4976.png | 36.44dB
+23-02-01 11:02:32.353 : -321--> test4977.png | 35.78dB
+23-02-01 11:02:33.042 : -322--> test4978.png | 35.88dB
+23-02-01 11:02:34.169 : -323--> test4979.png | 35.82dB
+23-02-01 11:02:36.438 : -324--> test4980.png | 35.39dB
+23-02-01 11:02:37.090 : -325--> test4981.png | 34.83dB
+23-02-01 11:02:38.588 : -326--> test4982.png | 35.91dB
+23-02-01 11:02:39.354 : -327--> test4983.png | 35.19dB
+23-02-01 11:02:40.845 : -328--> test4984.png | 35.53dB
+23-02-01 11:02:42.604 : -329--> test4985.png | 35.49dB
+23-02-01 11:02:44.441 : -330--> test4986.png | 35.72dB
+23-02-01 11:02:45.572 : -331--> test4987.png | 36.43dB
+23-02-01 11:02:47.002 : -332--> test4988.png | 35.20dB
+23-02-01 11:02:48.810 : -333--> test4989.png | 34.77dB
+23-02-01 11:02:49.735 : -334--> test4990.png | 35.33dB
+23-02-01 11:02:52.200 : -335--> test4991.png | 36.33dB
+23-02-01 11:02:53.129 : -336--> test4992.png | 35.46dB
+23-02-01 11:02:55.297 : -337--> test4993.png | 35.91dB
+23-02-01 11:02:57.666 : -338--> test4994.png | 36.34dB
+23-02-01 11:02:58.347 : -339--> test4995.png | 36.82dB
+23-02-01 11:02:59.791 : -340--> test4996.png | 35.96dB
+23-02-01 11:03:01.988 : -341--> test4997.png | 37.21dB
+23-02-01 11:03:04.506 : -342--> test4998.png | 37.20dB
+23-02-01 11:03:05.711 : -343--> test4999.png | 36.31dB
+23-02-01 11:03:07.365 : -344--> test5000.png | 35.54dB
+23-02-01 11:03:09.544 : -345--> test5001.png | 33.19dB
+23-02-01 11:03:11.663 : -346--> test5002.png | 32.86dB
+23-02-01 11:03:12.365 : -347--> test5003.png | 32.93dB
+23-02-01 11:03:13.877 : -348--> test5004.png | 32.94dB
+23-02-01 11:03:15.434 : -349--> test5005.png | 32.72dB
+23-02-01 11:03:17.009 : -350--> test5006.png | 32.34dB
+23-02-01 11:03:18.497 : -351--> test5007.png | 32.56dB
+23-02-01 11:03:19.204 : -352--> test5008.png | 33.49dB
+23-02-01 11:03:20.372 : -353--> test5009.png | 35.86dB
+23-02-01 11:03:22.641 : -354--> test5010.png | 38.76dB
+23-02-01 11:03:23.827 : -355--> test5011.png | 38.38dB
+23-02-01 11:03:26.064 : -356--> test5012.png | 37.93dB
+23-02-01 11:03:27.692 : -357--> test5013.png | 36.96dB
+23-02-01 11:03:28.327 : -358--> test5014.png | 36.89dB
+23-02-01 11:03:29.329 : -359--> test5015.png | 37.28dB
+23-02-01 11:03:31.479 : -360--> test5016.png | 37.07dB
+23-02-01 11:03:32.173 : -361--> test5017.png | 34.53dB
+23-02-01 11:03:33.604 : -362--> test5018.png | 33.05dB
+23-02-01 11:03:35.040 : -363--> test5019.png | 33.33dB
+23-02-01 11:03:37.839 : -364--> test5020.png | 33.76dB
+23-02-01 11:03:40.095 : -365--> test5021.png | 33.62dB
+23-02-01 11:03:40.976 : -366--> test5022.png | 32.72dB
+23-02-01 11:03:42.170 : -367--> test5023.png | 32.98dB
+23-02-01 11:03:43.729 : -368--> test5024.png | 33.17dB
+23-02-01 11:03:44.904 : -369--> test5025.png | 34.41dB
+23-02-01 11:03:46.322 : -370--> test5026.png | 34.50dB
+23-02-01 11:03:47.885 : -371--> test5027.png | 33.97dB
+23-02-01 11:03:50.629 : -372--> test5028.png | 36.13dB
+23-02-01 11:03:51.975 : -373--> test5029.png | 34.36dB
+23-02-01 11:03:53.720 : -374--> test5030.png | 33.67dB
+23-02-01 11:03:54.962 : -375--> test5031.png | 34.08dB
+23-02-01 11:03:55.627 : -376--> test5032.png | 33.98dB
+23-02-01 11:03:56.839 : -377--> test5033.png | 33.33dB
+23-02-01 11:03:57.690 : -378--> test5034.png | 33.41dB
+23-02-01 11:03:58.359 : -379--> test5035.png | 34.11dB
+23-02-01 11:03:59.746 : -380--> test5036.png | 35.39dB
+23-02-01 11:04:03.184 : -381--> test5037.png | 34.86dB
+23-02-01 11:04:06.591 : -382--> test5038.png | 33.91dB
+23-02-01 11:04:07.769 : -383--> test5039.png | 33.64dB
+23-02-01 11:04:09.456 : -384--> test5040.png | 35.00dB
+23-02-01 11:04:12.835 : -385--> test5041.png | 34.88dB
+23-02-01 11:04:15.051 : -386--> test5042.png | 34.38dB
+23-02-01 11:04:16.422 : -387--> test5043.png | 33.59dB
+23-02-01 11:04:17.927 : -388--> test5044.png | 34.96dB
+23-02-01 11:04:19.612 : -389--> test5045.png | 35.97dB
+23-02-01 11:04:21.355 : -390--> test5046.png | 36.88dB
+23-02-01 11:04:23.294 : -391--> test5047.png | 36.94dB
+23-02-01 11:04:24.289 : -392--> test5048.png | 37.31dB
+23-02-01 11:04:25.568 : -393--> test5049.png | 37.37dB
+23-02-01 11:04:26.891 : -394--> test5050.png | 36.97dB
+23-02-01 11:04:27.992 : -395--> test5051.png | 36.34dB
+23-02-01 11:04:28.965 : -396--> test5052.png | 35.20dB
+23-02-01 11:04:30.570 : -397--> test5053.png | 35.59dB
+23-02-01 11:04:31.852 : -398--> test5054.png | 35.17dB
+23-02-01 11:04:33.562 : -399--> test5055.png | 34.64dB
+23-02-01 11:04:34.436 : -400--> test5056.png | 35.16dB
+23-02-01 11:04:35.793 : -401--> test5057.png | 35.16dB
+23-02-01 11:04:37.311 : -402--> test5058.png | 35.31dB
+23-02-01 11:04:38.978 : -403--> test5059.png | 34.93dB
+23-02-01 11:04:41.207 : -404--> test5060.png | 34.93dB
+23-02-01 11:04:42.348 : -405--> test5061.png | 34.98dB
+23-02-01 11:04:43.446 : -406--> test5062.png | 35.19dB
+23-02-01 11:04:44.697 : -407--> test5063.png | 34.68dB
+23-02-01 11:04:45.895 : -408--> test5064.png | 35.41dB
+23-02-01 11:04:46.577 : -409--> test5065.png | 34.88dB
+23-02-01 11:04:47.719 : -410--> test5066.png | 32.87dB
+23-02-01 11:04:48.941 : -411--> test5067.png | 33.73dB
+23-02-01 11:04:50.520 : -412--> test5068.png | 34.95dB
+23-02-01 11:04:51.216 : -413--> test5069.png | 35.57dB
+23-02-01 11:04:53.484 : -414--> test5070.png | 35.63dB
+23-02-01 11:04:54.233 : -415--> test5071.png | 35.47dB
+23-02-01 11:04:55.896 : -416--> test5072.png | 36.47dB
+23-02-01 11:04:57.347 : -417--> test5073.png | 37.70dB
+23-02-01 11:04:58.173 : -418--> test5074.png | 38.14dB
+23-02-01 11:04:58.849 : -419--> test5075.png | 38.16dB
+23-02-01 11:04:59.816 : -420--> test5076.png | 38.60dB
+23-02-01 11:05:01.051 : -421--> test5077.png | 38.76dB
+23-02-01 11:05:02.121 : -422--> test5078.png | 38.75dB
+23-02-01 11:05:03.815 : -423--> test5079.png | 38.11dB
+23-02-01 11:05:04.991 : -424--> test5080.png | 36.50dB
+23-02-01 11:05:06.211 : -425--> test5081.png | 34.59dB
+23-02-01 11:05:07.394 : -426--> test5082.png | 33.78dB
+23-02-01 11:05:09.018 : -427--> test5083.png | 35.63dB
+23-02-01 11:05:11.171 : -428--> test5084.png | 34.09dB
+23-02-01 11:05:12.273 : -429--> test5085.png | 33.45dB
+23-02-01 11:05:14.442 : -430--> test5086.png | 33.34dB
+23-02-01 11:05:15.725 : -431--> test5087.png | 34.61dB
+23-02-01 11:05:16.391 : -432--> test5088.png | 34.54dB
+23-02-01 11:05:17.112 : -433--> test5089.png | 35.03dB
+23-02-01 11:05:17.820 : -434--> test5090.png | 35.93dB
+23-02-01 11:05:18.475 : -435--> test5091.png | 34.71dB
+23-02-01 11:05:19.188 : -436--> test5092.png | 34.23dB
+23-02-01 11:05:21.351 : -437--> test5093.png | 37.29dB
+23-02-01 11:05:22.591 : -438--> test5094.png | 36.51dB
+23-02-01 11:05:23.800 : -439--> test5095.png | 33.59dB
+23-02-01 11:05:25.503 : -440--> test5096.png | 32.96dB
+23-02-01 11:05:26.650 : -441--> test5097.png | 34.00dB
+23-02-01 11:05:27.356 : -442--> test5098.png | 33.75dB
+23-02-01 11:05:28.640 : -443--> test5099.png | 34.46dB
+23-02-01 11:05:30.265 : -444--> test5100.png | 34.14dB
+23-02-01 11:05:31.372 : -445--> test5101.png | 34.58dB
+23-02-01 11:05:32.599 : -446--> test5102.png | 33.49dB
+23-02-01 11:05:35.124 : -447--> test5103.png | 34.41dB
+23-02-01 11:05:36.299 : -448--> test5104.png | 33.94dB
+23-02-01 11:05:37.519 : -449--> test5105.png | 36.15dB
+23-02-01 11:05:38.713 : -450--> test5106.png | 34.86dB
+23-02-01 11:05:39.441 : -451--> test5107.png | 33.36dB
+23-02-01 11:05:41.650 : -452--> test5108.png | 32.80dB
+23-02-01 11:05:43.243 : -453--> test5109.png | 33.83dB
+23-02-01 11:05:45.537 : -454--> test5110.png | 34.95dB
+23-02-01 11:05:46.205 : -455--> test5111.png | 34.88dB
+23-02-01 11:05:48.976 : -456--> test5112.png | 35.37dB
+23-02-01 11:05:51.160 : -457--> test5113.png | 36.30dB
+23-02-01 11:05:52.648 : -458--> test5114.png | 36.83dB
+23-02-01 11:05:53.286 : -459--> test5115.png | 34.39dB
+23-02-01 11:05:54.446 : -460--> test5116.png | 35.04dB
+23-02-01 11:05:56.708 : -461--> test5117.png | 36.13dB
+23-02-01 11:05:58.847 : -462--> test5118.png | 35.64dB
+23-02-01 11:06:01.023 : -463--> test5119.png | 34.72dB
+23-02-01 11:06:03.180 : -464--> test5120.png | 35.33dB
+23-02-01 11:06:04.811 : -465--> test5121.png | 35.70dB
+23-02-01 11:06:06.262 : -466--> test5122.png | 35.51dB
+23-02-01 11:06:06.936 : -467--> test5123.png | 35.51dB
+23-02-01 11:06:08.087 : -468--> test5124.png | 35.46dB
+23-02-01 11:06:08.944 : -469--> test5125.png | 35.62dB
+23-02-01 11:06:10.321 : -470--> test5126.png | 36.58dB
+23-02-01 11:06:11.731 : -471--> test5127.png | 37.14dB
+23-02-01 11:06:13.029 : -472--> test5128.png | 35.03dB
+23-02-01 11:06:13.916 : -473--> test5129.png | 34.91dB
+23-02-01 11:06:15.342 : -474--> test5130.png | 33.87dB
+23-02-01 11:06:17.699 : -475--> test5131.png | 31.81dB
+23-02-01 11:06:18.902 : -476--> test5132.png | 34.11dB
+23-02-01 11:06:19.901 : -477--> test5133.png | 33.76dB
+23-02-01 11:06:22.026 : -478--> test5134.png | 33.74dB
+23-02-01 11:06:24.212 : -479--> test5135.png | 35.60dB
+23-02-01 11:06:26.380 : -480--> test5136.png | 35.11dB
+23-02-01 11:06:28.817 : -481--> test5137.png | 35.59dB
+23-02-01 11:06:31.008 : -482--> test5138.png | 36.22dB
+23-02-01 11:06:31.630 : -483--> test5139.png | 35.56dB
+23-02-01 11:06:33.803 : -484--> test5140.png | 34.95dB
+23-02-01 11:06:35.071 : -485--> test5141.png | 35.87dB
+23-02-01 11:06:35.778 : -486--> test5142.png | 34.70dB
+23-02-01 11:06:36.923 : -487--> test5143.png | 34.79dB
+23-02-01 11:06:37.582 : -488--> test5144.png | 35.60dB
+23-02-01 11:06:39.155 : -489--> test5145.png | 35.77dB
+23-02-01 11:06:40.386 : -490--> test5146.png | 36.12dB
+23-02-01 11:06:41.593 : -491--> test5147.png | 36.17dB
+23-02-01 11:06:42.276 : -492--> test5148.png | 36.99dB
+23-02-01 11:06:42.953 : -493--> test5149.png | 37.26dB
+23-02-01 11:06:44.169 : -494--> test5150.png | 36.28dB
+23-02-01 11:06:44.855 : -495--> test5151.png | 35.04dB
+23-02-01 11:06:45.533 : -496--> test5152.png | 35.67dB
+23-02-01 11:06:46.704 : -497--> test5153.png | 35.14dB
+23-02-01 11:06:47.901 : -498--> test5154.png | 35.11dB
+23-02-01 11:06:49.131 : -499--> test5155.png | 35.46dB
+23-02-01 11:06:50.387 : -500--> test5156.png | 34.84dB
+23-02-01 11:06:51.130 : -501--> test5157.png | 35.59dB
+23-02-01 11:06:52.326 : -502--> test5158.png | 35.93dB
+23-02-01 11:06:54.506 : -503--> test5159.png | 35.87dB
+23-02-01 11:06:56.115 : -504--> test5160.png | 35.64dB
+23-02-01 11:06:57.327 : -505--> test5161.png | 35.73dB
+23-02-01 11:06:58.340 : -506--> test5162.png | 36.30dB
+23-02-01 11:07:01.574 : -507--> test5163.png | 35.65dB
+23-02-01 11:07:02.730 : -508--> test5164.png | 33.68dB
+23-02-01 11:07:03.894 : -509--> test5165.png | 32.91dB
+23-02-01 11:07:05.536 : -510--> test5166.png | 33.88dB
+23-02-01 11:07:07.773 : -511--> test5167.png | 35.58dB
+23-02-01 11:07:09.419 : -512--> test5168.png | 35.22dB
+23-02-01 11:07:10.671 : -513--> test5169.png | 36.07dB
+23-02-01 11:07:11.376 : -514--> test5170.png | 35.50dB
+23-02-01 11:07:12.526 : -515--> test5171.png | 35.49dB
+23-02-01 11:07:14.081 : -516--> test5172.png | 35.32dB
+23-02-01 11:07:15.310 : -517--> test5173.png | 35.72dB
+23-02-01 11:07:16.386 : -518--> test5174.png | 35.58dB
+23-02-01 11:07:17.082 : -519--> test5175.png | 33.70dB
+23-02-01 11:07:18.614 : -520--> test5176.png | 33.17dB
+23-02-01 11:07:19.632 : -521--> test5177.png | 32.87dB
+23-02-01 11:07:20.374 : -522--> test5178.png | 33.83dB
+23-02-01 11:07:21.544 : -523--> test5179.png | 33.28dB
+23-02-01 11:07:22.540 : -524--> test5180.png | 32.64dB
+23-02-01 11:07:23.814 : -525--> test5181.png | 33.85dB
+23-02-01 11:07:25.146 : -526--> test5182.png | 34.14dB
+23-02-01 11:07:26.606 : -527--> test5183.png | 34.45dB
+23-02-01 11:07:28.057 : -528--> test5184.png | 35.65dB
+23-02-01 11:07:29.347 : -529--> test5185.png | 35.17dB
+23-02-01 11:07:30.095 : -530--> test5186.png | 35.63dB
+23-02-01 11:07:31.431 : -531--> test5187.png | 36.30dB
+23-02-01 11:07:33.893 : -532--> test5188.png | 35.69dB
+23-02-01 11:07:35.167 : -533--> test5189.png | 34.95dB
+23-02-01 11:07:37.052 : -534--> test5190.png | 34.71dB
+23-02-01 11:07:38.744 : -535--> test5191.png | 34.18dB
+23-02-01 11:07:40.003 : -536--> test5192.png | 35.37dB
+23-02-01 11:07:41.277 : -537--> test5193.png | 35.74dB
+23-02-01 11:07:41.962 : -538--> test5194.png | 35.13dB
+23-02-01 11:07:44.423 : -539--> test5195.png | 34.19dB
+23-02-01 11:07:45.844 : -540--> test5196.png | 34.33dB
+23-02-01 11:07:47.991 : -541--> test5197.png | 36.16dB
+23-02-01 11:07:49.241 : -542--> test5198.png | 35.14dB
+23-02-01 11:07:50.910 : -543--> test5199.png | 35.48dB
+23-02-01 11:07:53.118 : -544--> test5200.png | 35.67dB
+23-02-01 11:07:54.337 : -545--> test5201.png | 36.19dB
+23-02-01 11:07:55.486 : -546--> test5202.png | 35.69dB
+23-02-01 11:07:57.116 : -547--> test5203.png | 34.85dB
+23-02-01 11:07:58.281 : -548--> test5204.png | 34.24dB
+23-02-01 11:08:00.917 : -549--> test5205.png | 35.06dB
+23-02-01 11:08:02.075 : -550--> test5206.png | 34.92dB
+23-02-01 11:08:03.316 : -551--> test5207.png | 35.84dB
+23-02-01 11:08:05.508 : -552--> test5208.png | 35.91dB
+23-02-01 11:08:06.645 : -553--> test5209.png | 35.40dB
+23-02-01 11:08:07.760 : -554--> test5210.png | 36.01dB
+23-02-01 11:08:08.916 : -555--> test5211.png | 36.25dB
+23-02-01 11:08:10.583 : -556--> test5212.png | 36.77dB
+23-02-01 11:08:11.770 : -557--> test5213.png | 35.97dB
+23-02-01 11:08:12.638 : -558--> test5214.png | 35.70dB
+23-02-01 11:08:14.352 : -559--> test5215.png | 36.44dB
+23-02-01 11:08:14.962 : -560--> test5216.png | 36.65dB
+23-02-01 11:08:16.110 : -561--> test5217.png | 39.07dB
+23-02-01 11:08:17.425 : -562--> test5218.png | 30.39dB
+23-02-01 11:08:18.980 : -563--> test5219.png | 32.60dB
+23-02-01 11:08:21.164 : -564--> test5220.png | 36.46dB
+23-02-01 11:08:22.344 : -565--> test5221.png | 35.41dB
+23-02-01 11:08:23.552 : -566--> test5222.png | 34.17dB
+23-02-01 11:08:24.780 : -567--> test5223.png | 34.99dB
+23-02-01 11:08:26.385 : -568--> test5224.png | 36.09dB
+23-02-01 11:08:27.583 : -569--> test5225.png | 35.78dB
+23-02-01 11:08:28.653 : -570--> test5226.png | 35.17dB
+23-02-01 11:08:29.397 : -571--> test5227.png | 35.71dB
+23-02-01 11:08:30.311 : -572--> test5228.png | 34.07dB
+23-02-01 11:08:31.086 : -573--> test5229.png | 34.82dB
+23-02-01 11:08:32.769 : -574--> test5230.png | 35.68dB
+23-02-01 11:08:34.090 : -575--> test5231.png | 35.62dB
+23-02-01 11:08:34.695 : -576--> test5232.png | 35.79dB
+23-02-01 11:08:35.863 : -577--> test5233.png | 35.53dB
+23-02-01 11:08:36.534 : -578--> test5234.png | 36.86dB
+23-02-01 11:08:37.676 : -579--> test5235.png | 36.02dB
+23-02-01 11:08:38.358 : -580--> test5236.png | 37.03dB
+23-02-01 11:08:39.578 : -581--> test5237.png | 37.07dB
+23-02-01 11:08:42.162 : -582--> test5238.png | 36.47dB
+23-02-01 11:08:43.750 : -583--> test5239.png | 34.98dB
+23-02-01 11:08:44.946 : -584--> test5240.png | 35.43dB
+23-02-01 11:08:47.338 : -585--> test5241.png | 35.87dB
+23-02-01 11:08:48.467 : -586--> test5242.png | 35.97dB
+23-02-01 11:08:49.237 : -587--> test5243.png | 35.45dB
+23-02-01 11:08:50.404 : -588--> test5244.png | 35.04dB
+23-02-01 11:08:52.168 : -589--> test5245.png | 34.94dB
+23-02-01 11:08:53.358 : -590--> test5246.png | 35.09dB
+23-02-01 11:08:54.495 : -591--> test5247.png | 36.31dB
+23-02-01 11:08:56.023 : -592--> test5248.png | 35.40dB
+23-02-01 11:08:58.411 : -593--> test5249.png | 34.44dB
+23-02-01 11:09:00.575 : -594--> test5250.png | 36.89dB
+23-02-01 11:09:01.769 : -595--> test5251.png | 36.71dB
+23-02-01 11:09:02.434 : -596--> test5252.png | 35.79dB
+23-02-01 11:09:03.611 : -597--> test5253.png | 36.14dB
+23-02-01 11:09:04.652 : -598--> test5254.png | 29.57dB
+23-02-01 11:09:05.346 : -599--> test5255.png | 27.05dB
+23-02-01 11:09:06.796 : -600--> test5256.png | 33.58dB
+23-02-01 11:09:08.407 : -601--> test5257.png | 36.63dB
+23-02-01 11:09:09.872 : -602--> test5258.png | 37.91dB
+23-02-01 11:09:10.565 : -603--> test5259.png | 37.85dB
+23-02-01 11:09:12.030 : -604--> test5260.png | 37.70dB
+23-02-01 11:09:13.611 : -605--> test5261.png | 37.45dB
+23-02-01 11:09:15.770 : -606--> test5262.png | 37.61dB
+23-02-01 11:09:16.438 : -607--> test5263.png | 37.45dB
+23-02-01 11:09:17.179 : -608--> test5264.png | 34.76dB
+23-02-01 11:09:18.345 : -609--> test5265.png | 35.17dB
+23-02-01 11:09:19.598 : -610--> test5266.png | 36.27dB
+23-02-01 11:09:20.265 : -611--> test5267.png | 36.03dB
+23-02-01 11:09:21.687 : -612--> test5268.png | 35.72dB
+23-02-01 11:09:22.864 : -613--> test5269.png | 36.08dB
+23-02-01 11:09:24.028 : -614--> test5270.png | 36.76dB
+23-02-01 11:09:24.744 : -615--> test5271.png | 35.49dB
+23-02-01 11:09:25.688 : -616--> test5272.png | 34.64dB
+23-02-01 11:09:27.925 : -617--> test5273.png | 34.15dB
+23-02-01 11:09:28.580 : -618--> test5274.png | 35.01dB
+23-02-01 11:09:29.261 : -619--> test5275.png | 35.21dB
+23-02-01 11:09:30.457 : -620--> test5276.png | 36.17dB
+23-02-01 11:09:31.105 : -621--> test5277.png | 36.85dB
+23-02-01 11:09:33.313 : -622--> test5278.png | 37.37dB
+23-02-01 11:09:34.432 : -623--> test5279.png | 37.37dB
+23-02-01 11:09:35.625 : -624--> test5280.png | 36.85dB
+23-02-01 11:09:36.798 : -625--> test5281.png | 34.10dB
+23-02-01 11:09:38.443 : -626--> test5282.png | 33.82dB
+23-02-01 11:09:39.981 : -627--> test5283.png | 37.07dB
+23-02-01 11:09:40.647 : -628--> test5284.png | 33.43dB
+23-02-01 11:09:41.904 : -629--> test5285.png | 32.47dB
+23-02-01 11:09:44.033 : -630--> test5286.png | 34.84dB
+23-02-01 11:09:45.580 : -631--> test5287.png | 33.88dB
+23-02-01 11:09:46.749 : -632--> test5288.png | 33.03dB
+23-02-01 11:09:48.914 : -633--> test5289.png | 33.54dB
+23-02-01 11:09:50.100 : -634--> test5290.png | 34.88dB
+23-02-01 11:09:50.787 : -635--> test5291.png | 35.06dB
+23-02-01 11:09:52.330 : -636--> test5292.png | 35.94dB
+23-02-01 11:09:53.743 : -637--> test5293.png | 35.36dB
+23-02-01 11:09:54.973 : -638--> test5294.png | 36.59dB
+23-02-01 11:09:56.524 : -639--> test5295.png | 36.13dB
+23-02-01 11:09:58.937 : -640--> test5296.png | 35.74dB
+23-02-01 11:09:59.610 : -641--> test5297.png | 37.15dB
+23-02-01 11:10:01.811 : -642--> test5298.png | 37.52dB
+23-02-01 11:10:03.010 : -643--> test5299.png | 38.15dB
+23-02-01 11:10:05.556 : -644--> test5300.png | 37.02dB
+23-02-01 11:10:06.822 : -645--> test5301.png | 35.04dB
+23-02-01 11:10:08.946 : -646--> test5302.png | 34.22dB
+23-02-01 11:10:09.827 : -647--> test5303.png | 35.64dB
+23-02-01 11:10:11.486 : -648--> test5304.png | 34.54dB
+23-02-01 11:10:12.735 : -649--> test5305.png | 35.00dB
+23-02-01 11:10:13.436 : -650--> test5306.png | 36.57dB
+23-02-01 11:10:15.594 : -651--> test5307.png | 36.47dB
+23-02-01 11:10:16.778 : -652--> test5308.png | 36.89dB
+23-02-01 11:10:17.964 : -653--> test5309.png | 36.27dB
+23-02-01 11:10:19.138 : -654--> test5310.png | 35.50dB
+23-02-01 11:10:19.770 : -655--> test5311.png | 37.16dB
+23-02-01 11:10:20.492 : -656--> test5312.png | 35.65dB
+23-02-01 11:10:21.197 : -657--> test5313.png | 34.33dB
+23-02-01 11:10:22.188 : -658--> test5314.png | 35.25dB
+23-02-01 11:10:23.461 : -659--> test5315.png | 36.29dB
+23-02-01 11:10:24.193 : -660--> test5316.png | 35.64dB
+23-02-01 11:10:25.385 : -661--> test5317.png | 36.37dB
+23-02-01 11:10:26.451 : -662--> test5318.png | 35.91dB
+23-02-01 11:10:28.614 : -663--> test5319.png | 34.44dB
+23-02-01 11:10:29.779 : -664--> test5320.png | 34.98dB
+23-02-01 11:10:30.961 : -665--> test5321.png | 35.29dB
+23-02-01 11:10:32.505 : -666--> test5322.png | 34.50dB
+23-02-01 11:10:35.091 : -667--> test5323.png | 35.98dB
+23-02-01 11:10:36.291 : -668--> test5324.png | 36.82dB
+23-02-01 11:10:37.945 : -669--> test5325.png | 35.54dB
+23-02-01 11:10:38.590 : -670--> test5326.png | 36.32dB
+23-02-01 11:10:39.780 : -671--> test5327.png | 35.00dB
+23-02-01 11:10:41.317 : -672--> test5328.png | 33.90dB
+23-02-01 11:10:42.900 : -673--> test5329.png | 33.82dB
+23-02-01 11:10:44.473 : -674--> test5330.png | 35.15dB
+23-02-01 11:10:46.971 : -675--> test5331.png | 35.06dB
+23-02-01 11:10:47.756 : -676--> test5332.png | 35.45dB
+23-02-01 11:10:50.093 : -677--> test5333.png | 36.87dB
+23-02-01 11:10:52.290 : -678--> test5334.png | 36.95dB
+23-02-01 11:10:53.466 : -679--> test5335.png | 36.74dB
+23-02-01 11:10:55.138 : -680--> test5336.png | 36.54dB
+23-02-01 11:10:56.356 : -681--> test5337.png | 35.08dB
+23-02-01 11:10:57.596 : -682--> test5338.png | 35.53dB
+23-02-01 11:10:58.744 : -683--> test5339.png | 36.58dB
+23-02-01 11:10:59.995 : -684--> test5340.png | 36.64dB
+23-02-01 11:11:00.652 : -685--> test5341.png | 36.49dB
+23-02-01 11:11:01.316 : -686--> test5342.png | 33.98dB
+23-02-01 11:11:02.186 : -687--> test5343.png | 30.91dB
+23-02-01 11:11:03.685 : -688--> test5344.png | 32.16dB
+23-02-01 11:11:04.893 : -689--> test5345.png | 33.96dB
+23-02-01 11:11:06.345 : -690--> test5346.png | 36.19dB
+23-02-01 11:11:07.735 : -691--> test5347.png | 37.22dB
+23-02-01 11:11:08.971 : -692--> test5348.png | 37.32dB
+23-02-01 11:11:10.375 : -693--> test5349.png | 37.94dB
+23-02-01 11:11:11.450 : -694--> test5350.png | 38.22dB
+23-02-01 11:11:12.140 : -695--> test5351.png | 37.94dB
+23-02-01 11:11:13.997 : -696--> test5352.png | 33.79dB
+23-02-01 11:11:16.262 : -697--> test5353.png | 35.00dB
+23-02-01 11:11:19.391 : -698--> test5354.png | 36.57dB
+23-02-01 11:11:20.067 : -699--> test5355.png | 37.72dB
+23-02-01 11:11:21.237 : -700--> test5356.png | 36.19dB
+23-02-01 11:11:22.581 : -701--> test5357.png | 35.27dB
+23-02-01 11:11:23.244 : -702--> test5358.png | 36.33dB
+23-02-01 11:11:25.458 : -703--> test5359.png | 36.28dB
+23-02-01 11:11:26.643 : -704--> test5360.png | 35.66dB
+23-02-01 11:11:27.837 : -705--> test5361.png | 35.99dB
+23-02-01 11:11:28.499 : -706--> test5362.png | 36.98dB
+23-02-01 11:11:29.152 : -707--> test5363.png | 34.96dB
+23-02-01 11:11:29.855 : -708--> test5364.png | 35.16dB
+23-02-01 11:11:32.068 : -709--> test5365.png | 36.13dB
+23-02-01 11:11:32.709 : -710--> test5366.png | 35.82dB
+23-02-01 11:11:34.380 : -711--> test5367.png | 36.42dB
+23-02-01 11:11:35.967 : -712--> test5368.png | 36.86dB
+23-02-01 11:11:37.209 : -713--> test5369.png | 36.71dB
+23-02-01 11:11:38.748 : -714--> test5370.png | 33.17dB
+23-02-01 11:11:39.469 : -715--> test5371.png | 35.22dB
+23-02-01 11:11:40.135 : -716--> test5372.png | 40.09dB
+23-02-01 11:11:42.317 : -717--> test5373.png | 43.33dB
+23-02-01 11:11:43.035 : -718--> test5374.png | 32.64dB
+23-02-01 11:11:44.239 : -719--> test5375.png | 36.00dB
+23-02-01 11:11:45.450 : -720--> test5376.png | 36.21dB
+23-02-01 11:11:46.853 : -721--> test5377.png | 34.27dB
+23-02-01 11:11:48.062 : -722--> test5378.png | 33.47dB
+23-02-01 11:11:49.728 : -723--> test5379.png | 34.31dB
+23-02-01 11:11:51.984 : -724--> test5380.png | 34.85dB
+23-02-01 11:11:52.688 : -725--> test5381.png | 35.00dB
+23-02-01 11:11:54.137 : -726--> test5382.png | 36.25dB
+23-02-01 11:11:56.609 : -727--> test5383.png | 35.43dB
+23-02-01 11:11:57.764 : -728--> test5384.png | 35.93dB
+23-02-01 11:11:59.919 : -729--> test5385.png | 37.31dB
+23-02-01 11:12:02.055 : -730--> test5386.png | 37.03dB
+23-02-01 11:12:02.776 : -731--> test5387.png | 36.63dB
+23-02-01 11:12:03.941 : -732--> test5388.png | 36.64dB
+23-02-01 11:12:05.152 : -733--> test5389.png | 38.03dB
+23-02-01 11:12:06.711 : -734--> test5390.png | 38.57dB
+23-02-01 11:12:07.922 : -735--> test5391.png | 35.28dB
+23-02-01 11:12:09.172 : -736--> test5392.png | 35.22dB
+23-02-01 11:12:10.365 : -737--> test5393.png | 35.98dB
+23-02-01 11:12:11.559 : -738--> test5394.png | 36.16dB
+23-02-01 11:12:12.778 : -739--> test5395.png | 35.92dB
+23-02-01 11:12:14.191 : -740--> test5396.png | 34.32dB
+23-02-01 11:12:15.444 : -741--> test5397.png | 36.86dB
+23-02-01 11:12:16.659 : -742--> test5398.png | 35.19dB
+23-02-01 11:12:17.316 : -743--> test5399.png | 33.32dB
+23-02-01 11:12:17.984 : -744--> test5400.png | 36.28dB
+23-02-01 11:12:19.223 : -745--> test5401.png | 35.71dB
+23-02-01 11:12:19.891 : -746--> test5402.png | 35.51dB
+23-02-01 11:12:21.294 : -747--> test5403.png | 35.44dB
+23-02-01 11:12:22.435 : -748--> test5404.png | 35.36dB
+23-02-01 11:12:24.588 : -749--> test5405.png | 37.05dB
+23-02-01 11:12:26.786 : -750--> test5406.png | 36.55dB
+23-02-01 11:12:27.922 : -751--> test5407.png | 37.55dB
+23-02-01 11:12:29.199 : -752--> test5408.png | 37.11dB
+23-02-01 11:12:30.829 : -753--> test5409.png | 36.94dB
+23-02-01 11:12:32.012 : -754--> test5410.png | 36.51dB
+23-02-01 11:12:33.041 : -755--> test5411.png | 37.81dB
+23-02-01 11:12:33.711 : -756--> test5412.png | 40.16dB
+23-02-01 11:12:34.662 : -757--> test5413.png | 38.59dB
+23-02-01 11:12:35.961 : -758--> test5414.png | 36.27dB
+23-02-01 11:12:37.590 : -759--> test5415.png | 40.90dB
+23-02-01 11:12:38.721 : -760--> test5416.png | 46.32dB
+23-02-01 11:12:39.916 : -761--> test5417.png | 38.03dB
+23-02-01 11:12:40.564 : -762--> test5418.png | 38.79dB
+23-02-01 11:12:42.127 : -763--> test5419.png | 39.13dB
+23-02-01 11:12:42.753 : -764--> test5420.png | 38.75dB
+23-02-01 11:12:44.018 : -765--> test5421.png | 38.26dB
+23-02-01 11:12:45.192 : -766--> test5422.png | 37.50dB
+23-02-01 11:12:45.893 : -767--> test5423.png | 37.54dB
+23-02-01 11:12:46.537 : -768--> test5424.png | 36.46dB
+23-02-01 11:12:48.790 : -769--> test5425.png | 36.29dB
+23-02-01 11:12:51.041 : -770--> test5426.png | 35.94dB
+23-02-01 11:12:52.684 : -771--> test5427.png | 36.03dB
+23-02-01 11:12:53.331 : -772--> test5428.png | 37.57dB
+23-02-01 11:12:54.793 : -773--> test5429.png | 38.71dB
+23-02-01 11:12:55.839 : -774--> test5430.png | 38.76dB
+23-02-01 11:12:57.041 : -775--> test5431.png | 38.19dB
+23-02-01 11:12:58.612 : -776--> test5432.png | 37.41dB
+23-02-01 11:13:00.746 : -777--> test5433.png | 37.75dB
+23-02-01 11:13:01.859 : -778--> test5434.png | 36.92dB
+23-02-01 11:13:04.520 : -779--> test5435.png | 38.33dB
+23-02-01 11:13:05.678 : -780--> test5436.png | 37.90dB
+23-02-01 11:13:06.921 : -781--> test5437.png | 37.10dB
+23-02-01 11:13:08.340 : -782--> test5438.png | 38.54dB
+23-02-01 11:13:10.542 : -783--> test5439.png | 38.21dB
+23-02-01 11:13:12.039 : -784--> test5440.png | 37.88dB
+23-02-01 11:13:13.212 : -785--> test5441.png | 37.26dB
+23-02-01 11:13:14.288 : -786--> test5442.png | 37.19dB
+23-02-01 11:13:14.953 : -787--> test5443.png | 37.90dB
+23-02-01 11:13:16.130 : -788--> test5444.png | 36.54dB
+23-02-01 11:13:16.788 : -789--> test5445.png | 36.74dB
+23-02-01 11:13:17.796 : -790--> test5446.png | 35.66dB
+23-02-01 11:13:18.945 : -791--> test5447.png | 36.00dB
+23-02-01 11:13:20.329 : -792--> test5448.png | 36.90dB
+23-02-01 11:13:20.968 : -793--> test5449.png | 36.71dB
+23-02-01 11:13:22.144 : -794--> test5450.png | 37.53dB
+23-02-01 11:13:24.319 : -795--> test5451.png | 36.59dB
+23-02-01 11:13:24.976 : -796--> test5452.png | 36.94dB
+23-02-01 11:13:27.548 : -797--> test5453.png | 37.50dB
+23-02-01 11:13:28.237 : -798--> test5454.png | 36.91dB
+23-02-01 11:13:29.751 : -799--> test5455.png | 37.55dB
+23-02-01 11:13:31.376 : -800--> test5456.png | 41.06dB
+23-02-01 11:13:32.846 : -801--> test5457.png | 36.66dB
+23-02-01 11:13:33.985 : -802--> test5458.png | 38.12dB
+23-02-01 11:13:35.236 : -803--> test5459.png | 39.67dB
+23-02-01 11:13:35.926 : -804--> test5460.png | 40.04dB
+23-02-01 11:13:37.650 : -805--> test5461.png | 40.13dB
+23-02-01 11:13:38.295 : -806--> test5462.png | 40.42dB
+23-02-01 11:13:39.432 : -807--> test5463.png | 40.78dB
+23-02-01 11:13:40.650 : -808--> test5464.png | 40.69dB
+23-02-01 11:13:42.912 : -809--> test5465.png | 40.22dB
+23-02-01 11:13:44.022 : -810--> test5466.png | 40.23dB
+23-02-01 11:13:45.145 : -811--> test5467.png | 40.41dB
+23-02-01 11:13:46.338 : -812--> test5468.png | 40.50dB
+23-02-01 11:13:47.501 : -813--> test5469.png | 40.13dB
+23-02-01 11:13:48.996 : -814--> test5470.png | 40.09dB
+23-02-01 11:13:50.536 : -815--> test5471.png | 38.45dB
+23-02-01 11:13:51.254 : -816--> test5472.png | 40.11dB
+23-02-01 11:13:52.537 : -817--> test5473.png | 39.85dB
+23-02-01 11:13:54.137 : -818--> test5474.png | 40.03dB
+23-02-01 11:13:55.039 : -819--> test5475.png | 39.83dB
+23-02-01 11:13:56.279 : -820--> test5476.png | 39.20dB
+23-02-01 11:13:57.806 : -821--> test5477.png | 38.11dB
+23-02-01 11:13:59.995 : -822--> test5478.png | 36.88dB
+23-02-01 11:14:01.168 : -823--> test5479.png | 38.37dB
+23-02-01 11:14:03.334 : -824--> test5480.png | 38.03dB
+23-02-01 11:14:04.991 : -825--> test5481.png | 37.17dB
+23-02-01 11:14:06.142 : -826--> test5482.png | 36.83dB
+23-02-01 11:14:07.356 : -827--> test5483.png | 36.53dB
+23-02-01 11:14:08.573 : -828--> test5484.png | 36.16dB
+23-02-01 11:14:09.819 : -829--> test5485.png | 36.60dB
+23-02-01 11:14:10.493 : -830--> test5486.png | 36.66dB
+23-02-01 11:14:11.626 : -831--> test5487.png | 35.76dB
+23-02-01 11:14:12.304 : -832--> test5488.png | 34.68dB
+23-02-01 11:14:13.026 : -833--> test5489.png | 34.10dB
+23-02-01 11:14:15.265 : -834--> test5490.png | 34.81dB
+23-02-01 11:14:15.912 : -835--> test5491.png | 36.02dB
+23-02-01 11:14:17.136 : -836--> test5492.png | 37.06dB
+23-02-01 11:14:17.838 : -837--> test5493.png | 37.45dB
+23-02-01 11:14:19.525 : -838--> test5494.png | 37.57dB
+23-02-01 11:14:20.935 : -839--> test5495.png | 37.03dB
+23-02-01 11:14:22.143 : -840--> test5496.png | 35.88dB
+23-02-01 11:14:23.336 : -841--> test5497.png | 36.06dB
+23-02-01 11:14:24.576 : -842--> test5498.png | 37.64dB
+23-02-01 11:14:26.187 : -843--> test5499.png | 36.07dB
+23-02-01 11:14:26.926 : -844--> test5500.png | 35.37dB
+23-02-01 11:14:27.603 : -845--> test5501.png | 38.37dB
+23-02-01 11:14:29.074 : -846--> test5502.png | 42.71dB
+23-02-01 11:14:30.156 : -847--> test5503.png | 36.28dB
+23-02-01 11:14:31.357 : -848--> test5504.png | 36.88dB
+23-02-01 11:14:32.503 : -849--> test5505.png | 37.13dB
+23-02-01 11:14:33.155 : -850--> test5506.png | 37.54dB
+23-02-01 11:14:34.394 : -851--> test5507.png | 37.04dB
+23-02-01 11:14:35.883 : -852--> test5508.png | 37.64dB
+23-02-01 11:14:38.153 : -853--> test5509.png | 37.10dB
+23-02-01 11:14:38.803 : -854--> test5510.png | 36.54dB
+23-02-01 11:14:39.924 : -855--> test5511.png | 37.32dB
+23-02-01 11:14:41.150 : -856--> test5512.png | 35.74dB
+23-02-01 11:14:42.602 : -857--> test5513.png | 34.82dB
+23-02-01 11:14:45.122 : -858--> test5514.png | 35.83dB
+23-02-01 11:14:46.802 : -859--> test5515.png | 37.49dB
+23-02-01 11:14:47.460 : -860--> test5516.png | 36.77dB
+23-02-01 11:14:49.048 : -861--> test5517.png | 36.38dB
+23-02-01 11:14:50.333 : -862--> test5518.png | 36.77dB
+23-02-01 11:14:51.618 : -863--> test5519.png | 36.68dB
+23-02-01 11:14:52.776 : -864--> test5520.png | 36.37dB
+23-02-01 11:14:53.836 : -865--> test5521.png | 36.16dB
+23-02-01 11:14:55.001 : -866--> test5522.png | 36.34dB
+23-02-01 11:14:56.188 : -867--> test5523.png | 35.47dB
+23-02-01 11:14:57.272 : -868--> test5524.png | 36.39dB
+23-02-01 11:14:58.471 : -869--> test5525.png | 36.78dB
+23-02-01 11:14:59.610 : -870--> test5526.png | 36.44dB
+23-02-01 11:15:00.919 : -871--> test5527.png | 35.86dB
+23-02-01 11:15:01.551 : -872--> test5528.png | 35.88dB
+23-02-01 11:15:03.761 : -873--> test5529.png | 36.39dB
+23-02-01 11:15:04.417 : -874--> test5530.png | 36.38dB
+23-02-01 11:15:05.914 : -875--> test5531.png | 36.55dB
+23-02-01 11:15:07.470 : -876--> test5532.png | 36.43dB
+23-02-01 11:15:08.629 : -877--> test5533.png | 34.97dB
+23-02-01 11:15:09.961 : -878--> test5534.png | 35.27dB
+23-02-01 11:15:11.465 : -879--> test5535.png | 36.23dB
+23-02-01 11:15:12.782 : -880--> test5536.png | 35.98dB
+23-02-01 11:15:14.285 : -881--> test5537.png | 35.81dB
+23-02-01 11:15:15.550 : -882--> test5538.png | 36.40dB
+23-02-01 11:15:16.731 : -883--> test5539.png | 36.82dB
+23-02-01 11:15:19.306 : -884--> test5540.png | 35.82dB
+23-02-01 11:15:21.459 : -885--> test5541.png | 35.79dB
+23-02-01 11:15:22.097 : -886--> test5542.png | 44.03dB
+23-02-01 11:15:22.758 : -887--> test5543.png | 36.55dB
+23-02-01 11:15:23.938 : -888--> test5544.png | 37.42dB
+23-02-01 11:15:26.345 : -889--> test5545.png | 39.41dB
+23-02-01 11:15:27.059 : -890--> test5546.png | 39.37dB
+23-02-01 11:15:27.999 : -891--> test5547.png | 40.06dB
+23-02-01 11:15:29.278 : -892--> test5548.png | 40.04dB
+23-02-01 11:15:31.633 : -893--> test5549.png | 40.42dB
+23-02-01 11:15:32.251 : -894--> test5550.png | 36.51dB
+23-02-01 11:15:33.400 : -895--> test5551.png | 37.17dB
+23-02-01 11:15:34.127 : -896--> test5552.png | 35.87dB
+23-02-01 11:15:35.662 : -897--> test5553.png | 35.51dB
+23-02-01 11:15:36.640 : -898--> test5554.png | 39.54dB
+23-02-01 11:15:37.294 : -899--> test5555.png | 42.31dB
+23-02-01 11:15:38.320 : -900--> test5556.png | 40.90dB
+23-02-01 11:15:39.588 : -901--> test5557.png | 36.11dB
+23-02-01 11:15:40.752 : -902--> test5558.png | 36.05dB
+23-02-01 11:15:42.232 : -903--> test5559.png | 36.15dB
+23-02-01 11:15:43.426 : -904--> test5560.png | 35.94dB
+23-02-01 11:15:44.442 : -905--> test5561.png | 36.77dB
+23-02-01 11:15:45.612 : -906--> test5562.png | 36.82dB
+23-02-01 11:15:46.475 : -907--> test5563.png | 36.56dB
+23-02-01 11:15:47.598 : -908--> test5564.png | 35.79dB
+23-02-01 11:15:48.910 : -909--> test5565.png | 35.89dB
+23-02-01 11:15:50.508 : -910--> test5566.png | 36.09dB
+23-02-01 11:15:51.523 : -911--> test5567.png | 36.64dB
+23-02-01 11:15:52.710 : -912--> test5568.png | 36.44dB
+23-02-01 11:15:53.938 : -913--> test5569.png | 37.46dB
+23-02-01 11:15:55.598 : -914--> test5570.png | 36.71dB
+23-02-01 11:15:56.304 : -915--> test5571.png | 36.52dB
+23-02-01 11:15:57.312 : -916--> test5572.png | 38.08dB
+23-02-01 11:15:58.225 : -917--> test5573.png | 35.47dB
+23-02-01 11:15:59.591 : -918--> test5574.png | 35.35dB
+23-02-01 11:16:00.583 : -919--> test5575.png | 36.33dB
+23-02-01 11:16:01.895 : -920--> test5576.png | 35.84dB
+23-02-01 11:16:03.101 : -921--> test5577.png | 36.15dB
+23-02-01 11:16:04.113 : -922--> test5578.png | 36.68dB
+23-02-01 11:16:04.827 : -923--> test5579.png | 36.11dB
+23-02-01 11:16:06.182 : -924--> test5580.png | 35.91dB
+23-02-01 11:16:07.428 : -925--> test5581.png | 35.41dB
+23-02-01 11:16:09.016 : -926--> test5582.png | 35.87dB
+23-02-01 11:16:10.389 : -927--> test5583.png | 35.70dB
+23-02-01 11:16:12.010 : -928--> test5584.png | 35.31dB
+23-02-01 11:16:13.228 : -929--> test5585.png | 35.04dB
+23-02-01 11:16:15.472 : -930--> test5586.png | 35.00dB
+23-02-01 11:16:17.652 : -931--> test5587.png | 35.59dB
+23-02-01 11:16:18.274 : -932--> test5588.png | 36.72dB
+23-02-01 11:16:18.973 : -933--> test5589.png | 37.13dB
+23-02-01 11:16:19.688 : -934--> test5590.png | 36.76dB
+23-02-01 11:16:20.867 : -935--> test5591.png | 36.39dB
+23-02-01 11:16:23.809 : -936--> test5592.png | 36.21dB
+23-02-01 11:16:25.966 : -937--> test5593.png | 36.97dB
+23-02-01 11:16:26.622 : -938--> test5594.png | 36.27dB
+23-02-01 11:16:28.222 : -939--> test5595.png | 36.64dB
+23-02-01 11:16:29.423 : -940--> test5596.png | 35.83dB
+23-02-01 11:16:30.464 : -941--> test5597.png | 35.40dB
+23-02-01 11:16:31.140 : -942--> test5598.png | 35.42dB
+23-02-01 11:16:32.682 : -943--> test5599.png | 35.34dB
+23-02-01 11:16:33.621 : -944--> test5600.png | 35.16dB
+23-02-01 11:16:34.908 : -945--> test5601.png | 35.56dB
+23-02-01 11:16:36.342 : -946--> test5602.png | 35.51dB
+23-02-01 11:16:37.400 : -947--> test5603.png | 36.16dB
+23-02-01 11:16:38.830 : -948--> test5604.png | 37.36dB
+23-02-01 11:16:41.022 : -949--> test5605.png | 37.45dB
+23-02-01 11:16:42.200 : -950--> test5606.png | 37.72dB
+23-02-01 11:16:43.101 : -951--> test5607.png | 37.12dB
+23-02-01 11:16:44.253 : -952--> test5608.png | 36.59dB
+23-02-01 11:16:45.513 : -953--> test5609.png | 35.72dB
+23-02-01 11:16:46.700 : -954--> test5610.png | 35.28dB
+23-02-01 11:16:47.661 : -955--> test5611.png | 35.20dB
+23-02-01 11:16:48.413 : -956--> test5612.png | 35.12dB
+23-02-01 11:16:49.920 : -957--> test5613.png | 34.02dB
+23-02-01 11:16:51.387 : -958--> test5614.png | 34.37dB
+23-02-01 11:16:52.555 : -959--> test5615.png | 40.20dB
+23-02-01 11:16:53.757 : -960--> test5616.png | 40.38dB
+23-02-01 11:16:56.295 : -961--> test5617.png | 39.92dB
+23-02-01 11:16:56.972 : -962--> test5618.png | 40.02dB
+23-02-01 11:16:59.443 : -963--> test5619.png | 40.66dB
+23-02-01 11:17:00.627 : -964--> test5620.png | 40.71dB
+23-02-01 11:17:02.860 : -965--> test5621.png | 40.77dB
+23-02-01 11:17:04.401 : -966--> test5622.png | 40.35dB
+23-02-01 11:17:05.538 : -967--> test5623.png | 39.02dB
+23-02-01 11:17:06.413 : -968--> test5624.png | 37.76dB
+23-02-01 11:17:07.624 : -969--> test5625.png | 38.24dB
+23-02-01 11:17:09.370 : -970--> test5626.png | 37.43dB
+23-02-01 11:17:10.591 : -971--> test5627.png | 36.89dB
+23-02-01 11:17:12.073 : -972--> test5628.png | 36.88dB
+23-02-01 11:17:13.327 : -973--> test5629.png | 37.69dB
+23-02-01 11:17:14.592 : -974--> test5630.png | 38.35dB
+23-02-01 11:17:15.723 : -975--> test5631.png | 38.38dB
+23-02-01 11:17:17.348 : -976--> test5632.png | 37.48dB
+23-02-01 11:17:19.505 : -977--> test5633.png | 36.60dB
+23-02-01 11:17:20.184 : -978--> test5634.png | 36.01dB
+23-02-01 11:17:22.382 : -979--> test5635.png | 35.90dB
+23-02-01 11:17:23.064 : -980--> test5636.png | 35.94dB
+23-02-01 11:17:23.815 : -981--> test5637.png | 37.00dB
+23-02-01 11:17:25.282 : -982--> test5638.png | 35.94dB
+23-02-01 11:17:26.804 : -983--> test5639.png | 35.26dB
+23-02-01 11:17:28.080 : -984--> test5640.png | 35.24dB
+23-02-01 11:17:29.236 : -985--> test5641.png | 36.19dB
+23-02-01 11:17:31.495 : -986--> test5642.png | 36.36dB
+23-02-01 11:17:32.163 : -987--> test5643.png | 36.26dB
+23-02-01 11:17:33.665 : -988--> test5644.png | 35.78dB
+23-02-01 11:17:34.839 : -989--> test5645.png | 35.49dB
+23-02-01 11:17:35.914 : -990--> test5646.png | 36.64dB
+23-02-01 11:17:37.115 : -991--> test5647.png | 34.55dB
+23-02-01 11:17:38.629 : -992--> test5648.png | 43.65dB
+23-02-01 11:17:39.903 : -993--> test5649.png | 37.29dB
+23-02-01 11:17:41.145 : -994--> test5650.png | 36.47dB
+23-02-01 11:17:42.372 : -995--> test5651.png | 36.29dB
+23-02-01 11:17:43.377 : -996--> test5652.png | 35.19dB
+23-02-01 11:17:44.805 : -997--> test5653.png | 35.31dB
+23-02-01 11:17:46.158 : -998--> test5654.png | 36.12dB
+23-02-01 11:17:47.703 : -999--> test5655.png | 36.52dB
+23-02-01 11:17:49.132 : 1000--> test5656.png | 36.14dB
+23-02-01 11:17:49.838 : 1001--> test5657.png | 36.68dB
+23-02-01 11:17:50.999 : 1002--> test5658.png | 36.82dB
+23-02-01 11:17:51.673 : 1003--> test5659.png | 36.81dB
+23-02-01 11:17:52.624 : 1004--> test5660.png | 36.06dB
+23-02-01 11:17:53.836 : 1005--> test5661.png | 36.27dB
+23-02-01 11:17:55.037 : 1006--> test5662.png | 36.76dB
+23-02-01 11:17:56.235 : 1007--> test5663.png | 37.07dB
+23-02-01 11:17:57.562 : 1008--> test5664.png | 45.03dB
+23-02-01 11:17:58.618 : 1009--> test5665.png | 43.73dB
+23-02-01 11:17:59.856 : 1010--> test5666.png | 40.26dB
+23-02-01 11:18:01.276 : 1011--> test5667.png | 35.39dB
+23-02-01 11:18:02.602 : 1012--> test5668.png | 36.70dB
+23-02-01 11:18:03.758 : 1013--> test5669.png | 36.92dB
+23-02-01 11:18:04.772 : 1014--> test5670.png | 35.77dB
+23-02-01 11:18:05.456 : 1015--> test5671.png | 35.22dB
+23-02-01 11:18:07.045 : 1016--> test5672.png | 35.52dB
+23-02-01 11:18:08.280 : 1017--> test5673.png | 35.33dB
+23-02-01 11:18:09.972 : 1018--> test5674.png | 34.82dB
+23-02-01 11:18:12.511 : 1019--> test5675.png | 36.64dB
+23-02-01 11:18:13.722 : 1020--> test5676.png | 36.29dB
+23-02-01 11:18:15.886 : 1021--> test5677.png | 35.99dB
+23-02-01 11:18:17.121 : 1022--> test5678.png | 35.33dB
+23-02-01 11:18:18.633 : 1023--> test5679.png | 35.10dB
+23-02-01 11:18:19.862 : 1024--> test5680.png | 35.05dB
+23-02-01 11:18:21.131 : 1025--> test5681.png | 36.94dB
+23-02-01 11:18:23.319 : 1026--> test5682.png | 39.67dB
+23-02-01 11:18:25.480 : 1027--> test5683.png | 36.59dB
+23-02-01 11:18:26.129 : 1028--> test5684.png | 36.71dB
+23-02-01 11:18:27.087 : 1029--> test5685.png | 36.47dB
+23-02-01 11:18:27.813 : 1030--> test5686.png | 35.91dB
+23-02-01 11:18:29.058 : 1031--> test5687.png | 35.62dB
+23-02-01 11:18:30.635 : 1032--> test5688.png | 35.25dB
+23-02-01 11:18:31.343 : 1033--> test5689.png | 35.43dB
+23-02-01 11:18:32.471 : 1034--> test5690.png | 36.05dB
+23-02-01 11:18:35.042 : 1035--> test5691.png | 36.40dB
+23-02-01 11:18:37.181 : 1036--> test5692.png | 37.40dB
+23-02-01 11:18:37.840 : 1037--> test5693.png | 35.36dB
+23-02-01 11:18:39.360 : 1038--> test5694.png | 35.39dB
+23-02-01 11:18:40.559 : 1039--> test5695.png | 35.80dB
+23-02-01 11:18:41.752 : 1040--> test5696.png | 36.62dB
+23-02-01 11:18:42.825 : 1041--> test5697.png | 37.34dB
+23-02-01 11:18:43.973 : 1042--> test5698.png | 36.99dB
+23-02-01 11:18:44.679 : 1043--> test5699.png | 36.46dB
+23-02-01 11:18:45.857 : 1044--> test5700.png | 33.35dB
+23-02-01 11:18:47.100 : 1045--> test5701.png | 32.93dB
+23-02-01 11:18:48.551 : 1046--> test5702.png | 33.83dB
+23-02-01 11:18:51.681 : 1047--> test5703.png | 34.48dB
+23-02-01 11:18:52.847 : 1048--> test5704.png | 35.30dB
+23-02-01 11:18:54.057 : 1049--> test5705.png | 35.15dB
+23-02-01 11:18:55.256 : 1050--> test5706.png | 35.36dB
+23-02-01 11:18:56.922 : 1051--> test5707.png | 36.60dB
+23-02-01 11:18:59.215 : 1052--> test5708.png | 36.49dB
+23-02-01 11:19:01.633 : 1053--> test5709.png | 36.10dB
+23-02-01 11:19:03.217 : 1054--> test5710.png | 37.12dB
+23-02-01 11:19:04.633 : 1055--> test5711.png | 37.35dB
+23-02-01 11:19:05.488 : 1056--> test5712.png | 38.24dB
+23-02-01 11:19:06.252 : 1057--> test5713.png | 37.73dB
+23-02-01 11:19:08.282 : 1058--> test5714.png | 36.07dB
+23-02-01 11:19:09.680 : 1059--> test5715.png | 34.45dB
+23-02-01 11:19:10.916 : 1060--> test5716.png | 35.75dB
+23-02-01 11:19:12.384 : 1061--> test5717.png | 35.33dB
+23-02-01 11:19:13.336 : 1062--> test5718.png | 34.68dB
+23-02-01 11:19:14.738 : 1063--> test5719.png | 35.25dB
+23-02-01 11:19:16.156 : 1064--> test5720.png | 36.62dB
+23-02-01 11:19:17.419 : 1065--> test5721.png | 35.59dB
+23-02-01 11:19:18.099 : 1066--> test5722.png | 33.97dB
+23-02-01 11:19:19.213 : 1067--> test5723.png | 33.52dB
+23-02-01 11:19:20.821 : 1068--> test5724.png | 33.54dB
+23-02-01 11:19:22.982 : 1069--> test5725.png | 36.09dB
+23-02-01 11:19:24.117 : 1070--> test5726.png | 35.26dB
+23-02-01 11:19:25.337 : 1071--> test5727.png | 35.33dB
+23-02-01 11:19:26.601 : 1072--> test5728.png | 36.76dB
+23-02-01 11:19:28.260 : 1073--> test5729.png | 36.00dB
+23-02-01 11:19:29.457 : 1074--> test5730.png | 33.85dB
+23-02-01 11:19:31.624 : 1075--> test5731.png | 35.97dB
+23-02-01 11:19:33.197 : 1076--> test5732.png | 36.51dB
+23-02-01 11:19:34.370 : 1077--> test5733.png | 36.60dB
+23-02-01 11:19:36.582 : 1078--> test5734.png | 35.27dB
+23-02-01 11:19:37.712 : 1079--> test5735.png | 32.99dB
+23-02-01 11:19:38.776 : 1080--> test5736.png | 34.22dB
+23-02-01 11:19:40.961 : 1081--> test5737.png | 34.77dB
+23-02-01 11:19:41.599 : 1082--> test5738.png | 35.48dB
+23-02-01 11:19:42.565 : 1083--> test5739.png | 35.80dB
+23-02-01 11:19:43.722 : 1084--> test5740.png | 37.21dB
+23-02-01 11:19:45.998 : 1085--> test5741.png | 37.29dB
+23-02-01 11:19:48.157 : 1086--> test5742.png | 36.93dB
+23-02-01 11:19:49.344 : 1087--> test5743.png | 36.91dB
+23-02-01 11:19:50.368 : 1088--> test5744.png | 36.84dB
+23-02-01 11:19:51.570 : 1089--> test5745.png | 36.59dB
+23-02-01 11:19:53.101 : 1090--> test5746.png | 36.42dB
+23-02-01 11:19:54.596 : 1091--> test5747.png | 36.58dB
+23-02-01 11:19:55.761 : 1092--> test5748.png | 37.43dB
+23-02-01 11:19:56.844 : 1093--> test5749.png | 37.75dB
+23-02-01 11:19:57.481 : 1094--> test5750.png | 37.30dB
+23-02-01 11:19:59.695 : 1095--> test5751.png | 36.45dB
+23-02-01 11:20:00.352 : 1096--> test5752.png | 35.99dB
+23-02-01 11:20:01.999 : 1097--> test5753.png | 35.10dB
+23-02-01 11:20:03.207 : 1098--> test5754.png | 36.38dB
+23-02-01 11:20:04.400 : 1099--> test5755.png | 35.74dB
+23-02-01 11:20:05.628 : 1100--> test5756.png | 35.03dB
+23-02-01 11:20:07.783 : 1101--> test5757.png | 33.46dB
+23-02-01 11:20:09.966 : 1102--> test5758.png | 33.60dB
+23-02-01 11:20:11.580 : 1103--> test5759.png | 34.17dB
+23-02-01 11:20:12.839 : 1104--> test5760.png | 35.23dB
+23-02-01 11:20:13.956 : 1105--> test5761.png | 37.49dB
+23-02-01 11:20:16.113 : 1106--> test5762.png | 37.40dB
+23-02-01 11:20:17.665 : 1107--> test5763.png | 37.26dB
+23-02-01 11:20:19.829 : 1108--> test5764.png | 37.76dB
+23-02-01 11:20:20.891 : 1109--> test5765.png | 38.03dB
+23-02-01 11:20:23.057 : 1110--> test5766.png | 37.59dB
+23-02-01 11:20:25.375 : 1111--> test5767.png | 32.36dB
+23-02-01 11:20:26.013 : 1112--> test5768.png | 35.35dB
+23-02-01 11:20:27.381 : 1113--> test5769.png | 36.69dB
+23-02-01 11:20:28.023 : 1114--> test5770.png | 37.33dB
+23-02-01 11:20:29.574 : 1115--> test5771.png | 35.70dB
+23-02-01 11:20:30.481 : 1116--> test5772.png | 35.04dB
+23-02-01 11:20:31.788 : 1117--> test5773.png | 36.28dB
+23-02-01 11:20:32.890 : 1118--> test5774.png | 35.97dB
+23-02-01 11:20:33.565 : 1119--> test5775.png | 35.55dB
+23-02-01 11:20:34.724 : 1120--> test5776.png | 35.83dB
+23-02-01 11:20:35.990 : 1121--> test5777.png | 36.67dB
+23-02-01 11:20:37.583 : 1122--> test5778.png | 34.78dB
+23-02-01 11:20:38.732 : 1123--> test5779.png | 34.81dB
+23-02-01 11:20:41.324 : 1124--> test5780.png | 35.81dB
+23-02-01 11:20:42.033 : 1125--> test5781.png | 35.39dB
+23-02-01 11:20:43.628 : 1126--> test5782.png | 36.33dB
+23-02-01 11:20:44.828 : 1127--> test5783.png | 36.58dB
+23-02-01 11:20:47.068 : 1128--> test5784.png | 36.74dB
+23-02-01 11:20:48.715 : 1129--> test5785.png | 33.58dB
+23-02-01 11:20:50.368 : 1130--> test5786.png | 33.31dB
+23-02-01 11:20:51.610 : 1131--> test5787.png | 37.40dB
+23-02-01 11:20:53.239 : 1132--> test5788.png | 44.84dB
+23-02-01 11:20:54.102 : 1133--> test5789.png | 33.77dB
+23-02-01 11:20:55.606 : 1134--> test5790.png | 33.07dB
+23-02-01 11:20:57.879 : 1135--> test5791.png | 36.92dB
+23-02-01 11:20:58.757 : 1136--> test5792.png | 35.86dB
+23-02-01 11:20:59.966 : 1137--> test5793.png | 33.33dB
+23-02-01 11:21:01.633 : 1138--> test5794.png | 33.44dB
+23-02-01 11:21:02.823 : 1139--> test5795.png | 33.40dB
+23-02-01 11:21:03.658 : 1140--> test5796.png | 35.35dB
+23-02-01 11:21:04.319 : 1141--> test5797.png | 33.83dB
+23-02-01 11:21:05.713 : 1142--> test5798.png | 36.04dB
+23-02-01 11:21:07.329 : 1143--> test5799.png | 35.89dB
+23-02-01 11:21:08.242 : 1144--> test5800.png | 35.62dB
+23-02-01 11:21:09.523 : 1145--> test5801.png | 37.38dB
+23-02-01 11:21:11.038 : 1146--> test5802.png | 36.81dB
+23-02-01 11:21:12.238 : 1147--> test5803.png | 35.02dB
+23-02-01 11:21:14.416 : 1148--> test5804.png | 34.45dB
+23-02-01 11:21:15.622 : 1149--> test5805.png | 36.30dB
+23-02-01 11:21:17.829 : 1150--> test5806.png | 37.04dB
+23-02-01 11:21:19.439 : 1151--> test5807.png | 35.15dB
+23-02-01 11:21:20.182 : 1152--> test5808.png | 35.41dB
+23-02-01 11:21:21.371 : 1153--> test5809.png | 35.20dB
+23-02-01 11:21:22.913 : 1154--> test5810.png | 35.71dB
+23-02-01 11:21:24.493 : 1155--> test5811.png | 36.37dB
+23-02-01 11:21:25.679 : 1156--> test5812.png | 34.05dB
+23-02-01 11:21:26.725 : 1157--> test5813.png | 35.07dB
+23-02-01 11:21:28.981 : 1158--> test5814.png | 35.77dB
+23-02-01 11:21:30.492 : 1159--> test5815.png | 34.36dB
+23-02-01 11:21:31.745 : 1160--> test5816.png | 33.65dB
+23-02-01 11:21:31.850 : <epoch: 34, iter:  10,000, Average PSNR : 36.67dB
+
+23-02-01 11:30:03.696 : <epoch: 36, iter:  10,200, lr:1.000e-04> G_loss: 1.299e-02 

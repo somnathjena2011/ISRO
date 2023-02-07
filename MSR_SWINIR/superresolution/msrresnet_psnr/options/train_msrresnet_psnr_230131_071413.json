@@ -1,0 +1,110 @@
+{
+  "task": "msrresnet_psnr",
+  "model": "plain",
+  "gpu_ids": [
+    0
+  ],
+  "dist": false,
+  "scale": 4,
+  "n_channels": 3,
+  "sigma": 0,
+  "sigma_test": 0,
+  "merge_bn": false,
+  "merge_bn_startpoint": 400000,
+  "path": {
+    "root": "superresolution",
+    "pretrained_netG": "/content/drive/MyDrive/Super_Resolution_code/KAIR-master/superresolution/msrresnet_psnr/models/msrresnet_x4_psnr.pth",
+    "pretrained_netE": null,
+    "task": "superresolution/msrresnet_psnr",
+    "log": "superresolution/msrresnet_psnr",
+    "options": "superresolution/msrresnet_psnr/options",
+    "models": "superresolution/msrresnet_psnr/models",
+    "images": "superresolution/msrresnet_psnr/images",
+    "pretrained_optimizerG": null
+  },
+  "datasets": {
+    "train": {
+      "name": "train_dataset",
+      "dataset_type": "sr",
+      "dataroot_H": "/content/drive/MyDrive/URetinex-Net-main/demo/final_data/trainH",
+      "dataroot_L": null,
+      "H_size": 64,
+      "dataloader_shuffle": true,
+      "dataloader_num_workers": 8,
+      "dataloader_batch_size": 32,
+      "phase": "train",
+      "scale": 4,
+      "n_channels": 3
+    },
+    "test": {
+      "name": "test_dataset",
+      "dataset_type": "sr",
+      "dataroot_H": "/content/drive/MyDrive/URetinex-Net-main/demo/final_data/TestH",
+      "dataroot_L": null,
+      "phase": "test",
+      "scale": 4,
+      "n_channels": 3
+    }
+  },
+  "netG": {
+    "net_type": "msrresnet0",
+    "in_nc": 3,
+    "out_nc": 3,
+    "nc": 64,
+    "nb": 16,
+    "gc": 32,
+    "ng": 2,
+    "reduction": 16,
+    "act_mode": "R",
+    "upsample_mode": "upconv",
+    "downsample_mode": "strideconv",
+    "init_type": "orthogonal",
+    "init_bn_type": "uniform",
+    "init_gain": 0.2,
+    "scale": 4
+  },
+  "train": {
+    "G_lossfn_type": "l1",
+    "G_lossfn_weight": 1.0,
+    "E_decay": 0.999,
+    "G_optimizer_type": "adam",
+    "G_optimizer_lr": 0.0001,
+    "G_optimizer_wd": 0,
+    "G_optimizer_clipgrad": null,
+    "G_optimizer_reuse": false,
+    "G_scheduler_type": "MultiStepLR",
+    "G_scheduler_milestones": [
+      200000,
+      400000,
+      600000,
+      800000,
+      1000000,
+      2000000
+    ],
+    "G_scheduler_gamma": 0.5,
+    "G_regularizer_orthstep": null,
+    "G_regularizer_clipstep": null,
+    "G_param_strict": true,
+    "E_param_strict": true,
+    "checkpoint_test": 5000,
+    "checkpoint_save": 5000,
+    "checkpoint_print": 200,
+    "F_feature_layer": 34,
+    "F_weights": 1.0,
+    "F_lossfn_type": "l1",
+    "F_use_input_norm": true,
+    "F_use_range_norm": false,
+    "G_optimizer_betas": [
+      0.9,
+      0.999
+    ],
+    "G_scheduler_restart_weights": 1
+  },
+  "opt_path": "/content/drive/MyDrive/Super_Resolution_code/KAIR-master/options/train_msrresnet_psnr.json",
+  "is_train": true,
+  "find_unused_parameters": true,
+  "use_static_graph": false,
+  "num_gpu": 1,
+  "rank": 0,
+  "world_size": 1
+}

@@ -1,0 +1,66 @@
+23-01-28 10:48:16.008 : Model path: model_zoo/msrresnet_x4_psnr.pth
+23-01-28 10:48:16.009 : Params number: 1517571
+23-01-28 10:48:16.009 : model_name:msrresnet_x4_psnr, image sigma:0
+23-01-28 10:48:16.009 : testsets/set5
+23-01-28 10:48:19.748 : baby.bmp - PSNR: 32.25 dB; SSIM: 0.8690.
+23-01-28 10:48:20.611 : bird.bmp - PSNR: 32.91 dB; SSIM: 0.9274.
+23-01-28 10:48:21.408 : butterfly.bmp - PSNR: 27.20 dB; SSIM: 0.9069.
+23-01-28 10:48:22.292 : head.bmp - PSNR: 29.95 dB; SSIM: 0.7206.
+23-01-28 10:48:23.205 : woman.bmp - PSNR: 29.17 dB; SSIM: 0.9032.
+23-01-28 10:48:23.232 : Average PSNR/SSIM(RGB) - set5_msrresnet_x4_psnr - x4 --PSNR: 30.30 dB; SSIM: 0.8654
+23-01-28 10:48:23.233 : Average PSNR/SSIM( Y ) - set5_msrresnet_x4_psnr - x4 - PSNR: 32.21 dB; SSIM: 0.8948
+23-01-28 10:55:21.121 : Model path: model_zoo/msrresnet_x4_psnr.pth
+23-01-28 10:55:21.122 : Params number: 1517571
+23-01-28 10:55:21.122 : model_name:msrresnet_x4_psnr, image sigma:0
+23-01-28 10:55:21.122 : testsets/set5
+23-01-28 10:55:22.802 : baby.bmp - PSNR: 32.25 dB; SSIM: 0.8690.
+23-01-28 10:55:22.964 : bird.bmp - PSNR: 32.91 dB; SSIM: 0.9274.
+23-01-28 10:55:23.071 : butterfly.bmp - PSNR: 27.20 dB; SSIM: 0.9069.
+23-01-28 10:55:23.178 : head.bmp - PSNR: 29.95 dB; SSIM: 0.7206.
+23-01-28 10:55:23.266 : woman.bmp - PSNR: 29.17 dB; SSIM: 0.9032.
+23-01-28 10:55:23.313 : Average PSNR/SSIM(RGB) - set5_msrresnet_x4_psnr - x4 --PSNR: 30.30 dB; SSIM: 0.8654
+23-01-28 10:55:23.313 : Average PSNR/SSIM( Y ) - set5_msrresnet_x4_psnr - x4 - PSNR: 32.21 dB; SSIM: 0.8948
+23-01-28 11:01:12.213 : Model path: model_zoo/msrresnet_x4_psnr.pth
+23-01-28 11:01:12.214 : Params number: 1517571
+23-01-28 11:01:12.214 : model_name:msrresnet_x4_psnr, image sigma:0
+23-01-28 11:01:12.214 : testsets/set5
+23-01-28 11:01:13.901 : baby.bmp - PSNR: 32.25 dB; SSIM: 0.8690.
+23-01-28 11:01:14.065 : bird.bmp - PSNR: 32.91 dB; SSIM: 0.9274.
+23-01-28 11:01:14.176 : butterfly.bmp - PSNR: 27.20 dB; SSIM: 0.9069.
+23-01-28 11:01:14.289 : head.bmp - PSNR: 29.95 dB; SSIM: 0.7206.
+23-01-28 11:01:14.390 : woman.bmp - PSNR: 29.17 dB; SSIM: 0.9032.
+23-01-28 11:01:14.414 : Average PSNR/SSIM(RGB) - set5_msrresnet_x4_psnr - x4 --PSNR: 30.30 dB; SSIM: 0.8654
+23-01-28 11:01:14.414 : Average PSNR/SSIM( Y ) - set5_msrresnet_x4_psnr - x4 - PSNR: 32.21 dB; SSIM: 0.8948
+23-01-28 11:03:44.925 : Model path: model_zoo/msrresnet_x4_psnr.pth
+23-01-28 11:03:44.926 : Params number: 1517571
+23-01-28 11:03:44.926 : model_name:msrresnet_x4_psnr, image sigma:0
+23-01-28 11:03:44.926 : testsets/set5
+23-01-28 11:03:46.541 : baby.bmp - PSNR: 32.25 dB; SSIM: 0.8690.
+23-01-28 11:03:46.693 : bird.bmp - PSNR: 32.91 dB; SSIM: 0.9274.
+23-01-28 11:03:46.794 : butterfly.bmp - PSNR: 27.20 dB; SSIM: 0.9069.
+23-01-28 11:03:46.901 : head.bmp - PSNR: 29.95 dB; SSIM: 0.7206.
+23-01-28 11:03:46.991 : woman.bmp - PSNR: 29.17 dB; SSIM: 0.9032.
+23-01-28 11:03:47.017 : Average PSNR/SSIM(RGB) - set5_msrresnet_x4_psnr - x4 --PSNR: 30.30 dB; SSIM: 0.8654
+23-01-28 11:03:47.018 : Average PSNR/SSIM( Y ) - set5_msrresnet_x4_psnr - x4 - PSNR: 32.21 dB; SSIM: 0.8948
+23-01-28 11:06:43.539 : Model path: model_zoo/msrresnet_x4_psnr.pth
+23-01-28 11:06:43.540 : Params number: 1517571
+23-01-28 11:06:43.540 : model_name:msrresnet_x4_psnr, image sigma:0
+23-01-28 11:06:43.540 : testsets/set5
+23-01-28 11:06:45.166 : baby.bmp - PSNR: 32.25 dB; SSIM: 0.8690.
+23-01-28 11:06:45.316 : bird.bmp - PSNR: 32.91 dB; SSIM: 0.9274.
+23-01-28 11:06:45.429 : butterfly.bmp - PSNR: 27.20 dB; SSIM: 0.9069.
+23-01-28 11:06:45.532 : head.bmp - PSNR: 29.95 dB; SSIM: 0.7206.
+23-01-28 11:06:45.641 : woman.bmp - PSNR: 29.17 dB; SSIM: 0.9032.
+23-01-28 11:06:45.664 : Average PSNR/SSIM(RGB) - set5_msrresnet_x4_psnr - x4 --PSNR: 30.30 dB; SSIM: 0.8654
+23-01-28 11:06:45.665 : Average PSNR/SSIM( Y ) - set5_msrresnet_x4_psnr - x4 - PSNR: 32.21 dB; SSIM: 0.8948
+23-01-28 13:53:42.736 : Model path: model_zoo/msrresnet_x4_psnr.pth
+23-01-28 13:53:43.291 : Params number: 1517571
+23-01-28 13:53:43.291 : model_name:msrresnet_x4_psnr, image sigma:0
+23-01-28 13:53:43.291 : testsets/set5
+23-01-28 13:53:47.019 : baby.bmp - PSNR: 32.25 dB; SSIM: 0.8690.
+23-01-28 13:53:48.333 : bird.bmp - PSNR: 32.91 dB; SSIM: 0.9274.
+23-01-28 13:53:49.516 : butterfly.bmp - PSNR: 27.20 dB; SSIM: 0.9069.
+23-01-28 13:53:50.803 : head.bmp - PSNR: 29.95 dB; SSIM: 0.7206.
+23-01-28 13:53:51.994 : woman.bmp - PSNR: 29.17 dB; SSIM: 0.9032.
+23-01-28 13:53:52.579 : Average PSNR/SSIM(RGB) - set5_msrresnet_x4_psnr - x4 --PSNR: 30.30 dB; SSIM: 0.8654
+23-01-28 13:53:52.580 : Average PSNR/SSIM( Y ) - set5_msrresnet_x4_psnr - x4 - PSNR: 32.21 dB; SSIM: 0.8948

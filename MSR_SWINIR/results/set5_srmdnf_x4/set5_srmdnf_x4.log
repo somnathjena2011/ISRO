@@ -1,0 +1,43 @@
+23-02-04 22:11:41.662 : Model path: model_zoo/srmdnf_x4.pth
+23-02-04 22:11:41.666 : Params number: 1552048
+23-02-04 22:11:41.666 : model_name:srmdnf_x4, model sigma:0, image sigma:0
+23-02-04 22:11:41.666 : testsets/set5
+23-02-04 22:11:44.509 : baby.bmp - PSNR: 32.17 dB; SSIM: 0.8677.
+23-02-04 22:11:45.426 : bird.bmp - PSNR: 32.42 dB; SSIM: 0.9206.
+23-02-04 22:11:46.276 : butterfly.bmp - PSNR: 26.55 dB; SSIM: 0.8939.
+23-02-04 22:11:47.268 : head.bmp - PSNR: 29.92 dB; SSIM: 0.7196.
+23-02-04 22:11:48.115 : woman.bmp - PSNR: 29.05 dB; SSIM: 0.9002.
+23-02-04 22:11:48.140 : Average PSNR/SSIM(RGB) - set5_srmdnf_x4 - x4 --PSNR: 30.02 dB; SSIM: 0.8604
+23-02-04 22:11:48.141 : Average PSNR/SSIM( Y ) - set5_srmdnf_x4 - x4 - PSNR: 31.93 dB; SSIM: 0.8912
+23-02-04 22:14:26.923 : Model path: model_zoo/srmdnf_x4.pth
+23-02-04 22:14:26.925 : Params number: 1552048
+23-02-04 22:14:26.925 : model_name:srmdnf_x4, model sigma:0, image sigma:0
+23-02-04 22:14:26.925 : testsets/set5
+23-02-04 22:14:47.733 : Model path: model_zoo/srmdnf_x4.pth
+23-02-04 22:14:47.736 : Params number: 1552048
+23-02-04 22:14:47.736 : model_name:srmdnf_x4, model sigma:0, image sigma:0
+23-02-04 22:14:47.736 : testsets/set5
+23-02-04 22:14:48.629 : test (4).png - PSNR: 29.02 dB; SSIM: 0.7168.
+23-02-04 22:14:48.663 : Average PSNR/SSIM(RGB) - set5_srmdnf_x4 - x4 --PSNR: 29.02 dB; SSIM: 0.7168
+23-02-04 22:14:48.663 : Average PSNR/SSIM( Y ) - set5_srmdnf_x4 - x4 - PSNR: 30.31 dB; SSIM: 0.7469
+23-02-04 22:18:53.283 : Model path: model_zoo/srmdnf_x4.pth
+23-02-04 22:18:53.286 : Params number: 1552048
+23-02-04 22:18:53.286 : model_name:srmdnf_x4, model sigma:0, image sigma:0
+23-02-04 22:18:53.287 : testsets/set5
+23-02-04 22:18:53.376 : test (4).png - PSNR: 29.02 dB; SSIM: 0.7168.
+23-02-04 22:18:53.403 : Average PSNR/SSIM(RGB) - set5_srmdnf_x4 - x4 --PSNR: 29.02 dB; SSIM: 0.7168
+23-02-04 22:18:53.403 : Average PSNR/SSIM( Y ) - set5_srmdnf_x4 - x4 - PSNR: 30.31 dB; SSIM: 0.7469
+23-02-04 22:20:22.632 : Model path: model_zoo/srmdnf_x4.pth
+23-02-04 22:20:22.633 : Params number: 1552048
+23-02-04 22:20:22.633 : model_name:srmdnf_x4, model sigma:0, image sigma:0
+23-02-04 22:20:22.633 : testsets/set5
+23-02-04 22:20:24.123 : test4657.png - PSNR: 34.11 dB; SSIM: 0.8642.
+23-02-04 22:20:24.389 : Average PSNR/SSIM(RGB) - set5_srmdnf_x4 - x4 --PSNR: 34.11 dB; SSIM: 0.8642
+23-02-04 22:20:24.389 : Average PSNR/SSIM( Y ) - set5_srmdnf_x4 - x4 - PSNR: 35.37 dB; SSIM: 0.8820
+23-02-04 22:22:48.149 : Model path: model_zoo/srmdnf_x4.pth
+23-02-04 22:22:48.151 : Params number: 1552048
+23-02-04 22:22:48.151 : model_name:srmdnf_x4, model sigma:0, image sigma:0
+23-02-04 22:22:48.151 : testsets/set5
+23-02-04 22:22:48.822 : test4657.png - PSNR: 34.11 dB; SSIM: 0.8642.
+23-02-04 22:22:49.092 : Average PSNR/SSIM(RGB) - set5_srmdnf_x4 - x4 --PSNR: 34.11 dB; SSIM: 0.8642
+23-02-04 22:22:49.094 : Average PSNR/SSIM( Y ) - set5_srmdnf_x4 - x4 - PSNR: 35.37 dB; SSIM: 0.8820
