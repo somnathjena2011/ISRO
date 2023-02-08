@@ -16,7 +16,9 @@
 
 ## About The Project
 
-This project demonstrates the implementation of the `Raft Consensus algorithm` which is a consensus based protocol for distributed systems. This project is built as a part of the course `CS60002` **_Distributed Systems_** at Indian Institute of Technology, Kharagpur. This project implements a simple version of the raft protocol, which can be used as a base template to build your own distributed system by adding features. Following are the core features implemented in this projects:
+This project demonstrates the implementation of Deep Learning models for Image Super-Resolution of Lunar Surface data captured from 2 cameras from the Chandrayan-2 Mission of ISRO: namely TMC-2 and OHRC. 
+Terrain Mapping Camera-2 (TMC-2) Chadrayaan-2 Orbiter maps the lunar
+surface in the panchromatic spectral band (0.5-0.8 microns) with a spatial resolution of 5 meter. The Orbiter Higher Resolution Camera (OHRC) onboard Chadrayaan-2 Orbiter is an imaging payloads which provides high resolution (~ 30 cm) images of lunar surface. The Deep Learning model is trained to perform image super-resolution (SR) of the low resolution images to obtain high resolution images (~16x).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
