@@ -169,7 +169,7 @@ We modify the conventional discriminator of conventional GANs with a novel turin
 
 ## Stitched Atlas
 
-![Alt text](images/atlas_resized.png?raw=true "Figure shows the complete stiched lunar atlas")
+![Alt text](images/atlas_resized.png?raw=true "Figure shows the complete stitched lunar atlas")
 
 
 ## Acknowledgements
