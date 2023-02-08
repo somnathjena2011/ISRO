@@ -25,11 +25,12 @@
             <li><a href="#input-to-the-model">Input to the model</a></li>
         </ul>
     </li>
+    <li> <a href="#baselines">Baselines</a></li>
     <li> <a href="#stitched-atlas">Stitched Atlas</a></li>
     <li>
       <a href="#evaluation-of-sr-images-using-feature-comparison">Evaluation of SR images using Feature Comparison</a>
       <ul>
-            <li><a href="#dynamic-thresholding-algorithm">Dynamic Thresholding Algorithma></li>
+            <li><a href="#dynamic-thresholding-algorithm">Dynamic Thresholding Algorithm</a></li>
       </ul>
     </li>
     <li><a href="#determination-of-physical-features">Determination of Physical Features</a></li>
@@ -265,6 +266,25 @@ Architecutre of our proposed Lunar Turing-GAN (T-GAN)</p>
 * Depth map of Original Image
 
 We modify the conventional discriminator of conventional GANs with a novel turing loss that ensures the model places a special emphasis on the region of interest: in our case the craters and the hills. More specifically, as shown in the figure above, we have a Turing Test 1 (T1) which is trained to discriminate the fake image (SR) from the original image (HR). The Turing Test 2 (T2) is trained to perform the same discrimination only on the craters. Likewise Turing Test 3 (T3) is trained to discriminate the hills in the lunar surface. We detect the hills and craters from the OHRC images by manual annotation.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Baselines
+
+We compare our approach (Lunar T-GAN) with several state-of-the-art baselines as shown below
+<br>
+| Model                                          | Inference Time | Architecture | SSIM  | FSIM  | PSNR   | SAM    |
+|------------------------------------------------|----------------|--------------|-------|-------|--------|--------|
+| BicubIc Interpolation                          | 21.8 s         | Maths        | 0.762 | 0.651 | 59.014 | 64.672 |
+| SRGAN                                          | 55.9 s         | GAN          | 0.812 | 0.681 | 59.421 | 64.659 |
+| EDSR                                           | 51.8 s         | GAN          | 0.814 | 0.685 | 59.482 | 64.654 |
+| WDSR                                           | 39.5 s         | GAN          | 0.816 | 0.687 | 59.496 | 64.652 |
+| MSRNet                                         | 356 s          | CNN          | 0.828 | 0.691 | 59.561 |  64.42 |
+| SwinIR                                         | 359 s          | Transformer  | 0.858 | 0.696 | 59.653 |  64.39 |
+| Attention 2 Attention                          | 35.7 s         | Attention    | 0.812 | 0.679 | 59.305 | 64.663 |
+| Real ESRGAN                                    | 48.7 s         | GAN          | 0.838 | 0.689 | 59.559 | 64.645 |
+| HAT                                            | 337s           | Transformer  |  0.88 | 0.705 | 59.719 | 64.635 |
+| **Lunar T-GAN (Ours) - trained on 50 images**  | 11s            | GAN          | 0.794 | 0.672 | 59.104 | 64.669 |
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
