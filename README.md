@@ -213,6 +213,16 @@ We modify the conventional discriminator of conventional GANs with a novel turin
 
 Observing changes in lunar super-resolution images can provide valuable information about the geological and physical processes that have shaped the moon's surface over time. This can provide a better understanding of the moon's history and evolution, as well as help in planning for future missions to the moon. The high-resolution images can also reveal new features and details that were previously not visible, leading to new discoveries and scientific insights. We have built a variety of algorithms for comparison of physical features obtainable from the lunar images, before and after super-resolution. This conveys the improvement in the detection and analysis of features in the super-resolved images.
 
+### Dynamic Thresholding Algorithm:
+We have used a dynamic thresholding algorithm on the DEM data. We have made a histogram of the pixel values and have considered the top 2% of the pixels for identifying hills within the terrain data. Similarly, we have considered the bottom 2% of the pixels for identifying craters. 
+
+### Clustering Algorithm:
+We have clustered the craters together to identify and count the number of craters in an image. 
+
+
+
+
+
 
 <!-- ACKNOWLEDGEMENTS -->
 
