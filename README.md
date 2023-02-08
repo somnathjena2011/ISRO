@@ -6,12 +6,7 @@
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#project-structure">Project Structure</a></li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#installations">Installations</a></li>
-      </ul>
-    </li>
+    <li><a href="#installations">Installations</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -109,12 +104,7 @@ This project demonstrates the implementation of the `Raft Consensus algorithm` w
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-<!-- GETTING STARTED -->
-
-## Getting Started
-
-This section describes the installations needed for running the repo code
-as well as the steps to run super reoslution code
+<!-- INSTALLATIONS -->
 
 ### Installations
 
@@ -151,3 +141,21 @@ cd ..
 
 ```
 
+<!-- USAGE -->
+
+## Usage
+
+To run the super resolution code, you need to run the pipeline.py file
+passing appropriate arguments. So the present working directory should be the
+repository
+
+```bash
+
+python pipeline.py -i <input_file_path> -o <output_file_path> sr --sr_model <model_name> --scale <scale_factor> --tile <tile_size> int --scale <scale_factor> shp
+
+```
+
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## Acknowledgements
