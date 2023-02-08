@@ -181,6 +181,8 @@ python pipeline.py -i <input_file_path> -o <output_file_path> sr --sr_model <mod
 
 ```
 
+Download the pretrained weights from this link: https://drive.google.com/drive/folders/1wmWoJ2gYrbt6Fqkyr3x8oS-cvFEfCic1?usp=share_link
+
 Take note to download the trained weights to the appropriate folders as shown below (given in pipeline.py):
 ```bash
 model_dict = {
