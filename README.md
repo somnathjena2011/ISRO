@@ -153,11 +153,18 @@ repository
 
 ```bash
 
-python pipeline.py -i <input_file_path> -o <output_file_path> sr --sr_model <model_name> --scale <scale_factor> --tile <tile_size> int --scale <scale_factor> shp den --tile <tile_size>
+python pipeline.py -i <input_file_path> -o <output_file_path> sr --sr_model <model_name> --scale <scale_factor> --tile <tile_size> int --scale <scale_factor> shp
 
 ```
 
+## Model Description
 
+### Lunar Turing-GAN (T-GAN)
+
+
+![Alt text](images/Lunar_T-Gan.png?raw=true "Figure describes the architecutre of our proposed Lunar Turing-GAN (T-GAN)")
+
+We modify the conventional discriminator of conventional GANs with a novel turing loss that ensures the model places a special emphasis on the region of interest: in our case the craters and the hills. More specifically, as shown in the figure above, we have a Turing Test 1 (T1) which is trained to discriminate the fake image (SR) from the original image (HR). The Turing Test 2 (T2) is trained to perform the same discrimination only on the craters. Likewise Turing Test 3 (T3) is trained to discriminate the hills in the lunar surface. We detect the hills and craters from the OHRC images by manual annotation
 <!-- ACKNOWLEDGEMENTS -->
 
 ## Acknowledgements
