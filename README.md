@@ -240,6 +240,11 @@ The above figure shows the stero projection centered on the South Pole of the mo
 Observing changes in lunar super-resolution images can provide valuable information about the geological and physical processes that have shaped the moon's surface over time. This can provide a better understanding of the moon's history and evolution, as well as help in planning for future missions to the moon. The high-resolution images can also reveal new features and details that were previously not visible, leading to new discoveries and scientific insights. We have built a variety of algorithms for comparison of physical features obtainable from the lunar images, before and after super-resolution. This conveys the improvement in the detection and analysis of features in the super-resolved images.
 
 ### Dynamic Thresholding Algorithm:
+We have used a dynamic thresholding algorithm on the DEM data. We have made a histogram of the pixel values and have considered the top 2% of the pixels for identifying hills within the terrain data. Similarly, we have considered the bottom 2## Eval of SR images using Feature Comparison
+
+Observing changes in lunar super-resolution images can provide valuable information about the geological and physical processes that have shaped the moon's surface over time. This can provide a better understanding of the moon's history and evolution, as well as help in planning for future missions to the moon. The high-resolution images can also reveal new features and details that were previously not visible, leading to new discoveries and scientific insights. We have built a variety of algorithms for comparison of physical features obtainable from the lunar images, before and after super-resolution. This conveys the improvement in the detection and analysis of features in the super-resolved images.
+
+### Dynamic Thresholding Algorithm:
 We have used a dynamic thresholding algorithm on the DEM data. We have made a histogram of the pixel values and have considered the top 2% of the pixels for identifying hills within the terrain data. Similarly, we have considered the bottom 2% of the pixels for identifying craters. 
 
 
@@ -252,7 +257,7 @@ We observe an increase in the number of hills and high altitude features on the 
 
 A 3D plot of the terrain for the original image and the super resolved image shows the effect of the super-resolution and the enhancement of physical features like slope and surface dimensions.
 
-![Alt text](images/isro_3d_plots.png?raw=true "Three dimensional terrain map of original and super-resolved DEM image")
+![Alt text](images/isro_3d_plots.png?raw=true "Three dimensional terrain map of original and super-resolved DEM image")% of the pixels for identifying craters. 
 
 <!-- ACKNOWLEDGEMENTS -->
 
