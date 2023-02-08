@@ -221,7 +221,7 @@ We have clustered the craters together to identify and count the number of crate
 
 ![Alt text](images/atlas_resized.png?raw=true "Figure shows the complete stitched lunar atlas")
 
-We stitched all the avaialble TMC-2 data to form the complete stitched lunar atlas, which ranges from -180° to +180° in longitude and -90° to 90° in latitude as shown above.
+We stitched all the available TMC-2 data to form the complete stitched lunar atlas, which ranges from -180° to +180° in longitude and -90° to 90° in latitude as shown above.
 
 
 
