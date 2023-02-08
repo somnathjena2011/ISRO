@@ -157,6 +157,32 @@ python pipeline.py -i <input_file_path> -o <output_file_path> sr --sr_model <mod
 
 ```
 
+### Arguments format
+
+| **option**        | **alternate option** | **description**                                                       | **default**                |
+|-------------------|----------------------|-----------------------------------------------------------------------|----------------------------|
+| --input           | -i                   | input file path for single file input                                 | inputs/input.png           |
+| --output          | -o                   | output file path                                                      | outputs                    |
+| --input_folder    | -if                  | input folder consisting of only images                                | None                       |
+| --output_folder   | -of                  | output folder to store output images                                  | None                       |
+| --compress_output | -co                  | flag to indicate whether to save intermediate generated images or not | True                       |
+| sr                |                      |                                                                       |                            |
+| --sr_model        | -sm                  | name of SR model                                                      | realesrgan                 |
+| --sr_path         | -sp                  | path to SR code                                                       | ESRGAN                     |
+| --tile            | -t                   | tile size to avoid CUDA error                                         | None                       |
+| --model_path      | -mp                  | path of weights                                                       | None                       |
+| --scale           | s                    | scale factor                                                          | 4                          |
+| int               |                      |                                                                       |                            |
+| --int_model       | -im                  | name of interpolation method                                          | bicubic                    |
+| --int_path        | -ip                  | path to interpolation code                                            | Interpolate/interpolate.py |
+| --scale           | -s                   | scale factor                                                          | 4                          |
+| enh               |                      |                                                                       |                            |
+| --enh_path        | -ep                  | path containing light enhancement code                                | LightEnhancement           |
+| --enh_model       | -em                  | light enhancement model                                               | URetinex                   |
+| shp               |                      |                                                                       |                            |
+| den               |                      |                                                                       |                            |
+| --tile            | -t                   | tile size to avoid cuda error                                         | None                       |
+
 ## Model Description
 
 ### Lunar Turing-GAN (T-GAN)

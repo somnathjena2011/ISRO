@@ -13,7 +13,7 @@ commands = []
 scales = []
 types = []
 models = []
-input = "/content/drive/MyDrive/inputs/input.png"
+input = "inputs/input.png"
 output = None
 compressOutput = True
 inputFolder = None
@@ -60,9 +60,9 @@ while i < len(argList):
         outputFolder = argList[i+1]
         i+=2
     elif argList[i] in {"sr"}:
-        srPath = None
+        srPath = "ESRGAN"
         modelCode = "main_test_{}.py"
-        model = "msrresnet"
+        model = "realesrgan"
         tile = None
         model_path = None
         folder_lq = ""
