@@ -116,7 +116,7 @@ This project demonstrates the implementation of the `Raft Consensus algorithm` w
 This section describes the installations needed for running the repo code
 as well as the steps to run super reoslution code
 
-### Project Structure
+### Installations
 
 ```bash
 # Clone the repository
