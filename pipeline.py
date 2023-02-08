@@ -185,6 +185,9 @@ if inputFolder is None:
     if outputFolder is None:
         outputFolder = "/content/drive/MyDrive/outputs/"
 
+    if not outputFolder.endswith("/"):
+        outputFolder+="/"
+
     outputFormat = outputFolder + "{}_{}_{}." + ext
     outputPaths = [outputFormat for _ in models]
     inputPaths = [outputFormat for _ in models]
@@ -242,6 +245,9 @@ else:
 
         if outputFolder is None:
             outputFolder = "/content/drive/MyDrive/outputs/"
+        
+        if not outputFolder.endswith("/"):
+            outputFolder+="/"
 
         outputFormat = outputFolder + "{}_{}_{}." + ext
         outputPaths = [outputFormat for _ in models]
