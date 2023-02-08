@@ -205,10 +205,6 @@ python pipeline.py -i <input_file_path> -o <output_file_path> sr --sr_model <mod
 
 We modify the conventional discriminator of conventional GANs with a novel turing loss that ensures the model places a special emphasis on the region of interest: in our case the craters and the hills. More specifically, as shown in the figure above, we have a Turing Test 1 (T1) which is trained to discriminate the fake image (SR) from the original image (HR). The Turing Test 2 (T2) is trained to perform the same discrimination only on the craters. Likewise Turing Test 3 (T3) is trained to discriminate the hills in the lunar surface. We detect the hills and craters from the OHRC images by manual annotation.
 
-## Stitched Atlas
-
-![Alt text](images/atlas_resized.png?raw=true "Figure shows the complete stitched lunar atlas")
-
 ## Eval of SR images using Feature Comparison
 
 Observing changes in lunar super-resolution images can provide valuable information about the geological and physical processes that have shaped the moon's surface over time. This can provide a better understanding of the moon's history and evolution, as well as help in planning for future missions to the moon. The high-resolution images can also reveal new features and details that were previously not visible, leading to new discoveries and scientific insights. We have built a variety of algorithms for comparison of physical features obtainable from the lunar images, before and after super-resolution. This conveys the improvement in the detection and analysis of features in the super-resolved images.
@@ -221,6 +217,11 @@ We have clustered the craters together to identify and count the number of crate
 
 
 
+## Stitched Atlas
+
+![Alt text](images/atlas_resized.png?raw=true "Figure shows the complete stitched lunar atlas")
+
+We stitched all the avaialble TMC-2 data to form the complete stitched lunar atlas, which ranges from -180° to +180° in longitude and -90° to 90° in latitude as shown above.
 
 
 
