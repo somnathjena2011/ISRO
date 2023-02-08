@@ -1,5 +1,32 @@
 # ISRO
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#project-structure">Project Structure</a></li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installations">Installations</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+This project demonstrates the implementation of the `Raft Consensus algorithm` which is a consensus based protocol for distributed systems. This project is built as a part of the course `CS60002` **_Distributed Systems_** at Indian Institute of Technology, Kharagpur. This project implements a simple version of the raft protocol, which can be used as a base template to build your own distributed system by adding features. Following are the core features implemented in this projects:
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- PROJECT STRUCTURE -->
+
 ## Project Structure
 
 ```
@@ -79,8 +106,17 @@
     ├── NAFNet
     └── sharpen.py
 ```
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-# Setup
+
+<!-- GETTING STARTED -->
+
+## Getting Started
+
+This section describes the installations needed for running the repo code
+as well as the steps to run super reoslution code
+
+### Project Structure
 
 ```bash
 # Clone the repository
@@ -113,6 +149,5 @@ pip install -r requirements.txt
 python setup.py develop
 cd ..
 
-
-
 ```
+
