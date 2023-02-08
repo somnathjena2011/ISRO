@@ -151,6 +151,8 @@ def main():
     L_paths = util.get_image_paths(L_path)
     H_paths = util.get_image_paths(H_path) if need_H else None
 
+    print("PERFORMING SUPER RESOLUTION USING MSRRESNET")
+
     for idx, img in enumerate(L_paths):
         if args.file_name is not None and args.file_name!=os.path.basename(img):
             continue
@@ -176,6 +178,8 @@ def main():
 
         img_L = util.single2tensor4(img_L)
         img_L = img_L.to(device)
+
+        print("Input image shape = ", img_L.shape)
 
         # ------------------------------------
         # (2) img_E
@@ -269,6 +273,7 @@ def main():
         # save results
         # ------------------------------------
 
+        print("Output image shape = ", img_E.shape)
         if args.output_path is None:
             util.imsave(img_E, os.path.join(E_path, img_name+'_'+model_name+'.png'))
         else:

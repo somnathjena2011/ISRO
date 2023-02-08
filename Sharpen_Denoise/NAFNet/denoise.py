@@ -43,6 +43,8 @@ def single_image_inference(model, img, save_path, tile=None):
         E = torch.zeros(b, c, h, w).type_as(img)
         W = torch.zeros_like(E)
 
+        print(f"Input image shape={img.shape}")
+
         for h_idx in h_idx_list:
             for w_idx in w_idx_list:
                 in_patch = img[..., h_idx:h_idx+tile, w_idx:w_idx+tile]
@@ -68,8 +70,7 @@ def single_image_inference(model, img, save_path, tile=None):
                 E[..., h_idx:(h_idx+tile), w_idx:(w_idx+tile)].add_(out_patch)
                 W[..., h_idx:(h_idx+tile), w_idx:(w_idx+tile)].add_(out_patch_mask)
         sr_img = tensor2img(E.div_(W))
-        print(f"in shape={img.shape}")
-        print(f"out shape={sr_img.shape}")
+        print(f"Output shape={sr_img.shape}")
         imwrite(sr_img, save_path)
     
     else:
@@ -86,6 +87,7 @@ def single_image_inference(model, img, save_path, tile=None):
         visuals = model.get_current_visuals()
         sr_img = tensor2img([visuals['result']])
         print(f"de shape={sr_img.shape} path={save_path}")
+        print(f"Output shape={sr_img.shape}")
         imwrite(sr_img, save_path)
 
 def main():
@@ -110,6 +112,8 @@ def main():
         outPath = args.out_path
     if args.tile is not None:
         tile = args.tile
+    
+    print("PERFORMING DENOISING USING NAFNET")
 
     img_input = imread(inPath)
     inp = img2tensor(img_input)

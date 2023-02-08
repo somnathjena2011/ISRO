@@ -19,6 +19,8 @@ compressOutput = True
 inputFolder = None
 outputFolder = None
 
+#paths of the trained models for varius super resolution DL networks
+
 model_dict = {
     "realesrgan": {
         "sr_path": "ESRGAN",
@@ -38,6 +40,7 @@ model_dict = {
     }
 }
 
+#parsing the command line arguments
 while i < len(argList):
     if argList[i] in {"-i","--input"}:
         input = argList[i+1]
@@ -175,6 +178,7 @@ while i < len(argList):
         scales.append(scale)
         commands.append(command)
 
+#processing a single file
 if inputFolder is None:
     ext = input.split(".")[1]
 
@@ -225,7 +229,8 @@ if inputFolder is None:
         print(command)
         os.system(command)
     torch.cuda.empty_cache()
-
+#processing all files in a folder
+#PLEASE MAKE SURE ALL ARE IMAGES ONLY IF FOLDER IS PASSED
 else:
     copy_commands = copy.deepcopy(commands)
     for file in os.listdir(inputFolder):

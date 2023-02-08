@@ -93,7 +93,7 @@ def main():
     # determine model paths
     if args.model_path is not None:
         model_path = args.model_path
-        print("yes i am here ")
+        print("found sr model")
     else:
         model_path = os.path.join('weights', args.model_name + '.pth')
         if not os.path.isfile(model_path):
@@ -123,7 +123,6 @@ def main():
         gpu_id=args.gpu_id)
 
     if args.face_enhance:  # Use GFPGAN for face enhancement
-        print("i am not here")
         from gfpgan import GFPGANer
         face_enhancer = GFPGANer(
             model_path='https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth',
@@ -137,12 +136,16 @@ def main():
         paths = [os.path.join(args.folder_lq, args.file_name)]
     else:
         paths = sorted(glob.glob(os.path.join(args.folder_lq, '*')))
+    
+
+    print("PERFORMING SUPER RESOLUTION USING REALESRGAN")
 
     for idx, path in enumerate(paths):
         imgname, extension = os.path.splitext(os.path.basename(path))
         print('Testing', idx, imgname)
 
         img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+        print('Input image shape = ', img.shape)
         if len(img.shape) == 3 and img.shape[2] == 4:
             img_mode = 'RGBA'
         else:
@@ -157,6 +160,7 @@ def main():
             print('Error', error)
             print('If you encounter CUDA out of memory, try to set --tile with a smaller number.')
         else:
+            print('Output image shape = ', output.shape)
             if args.ext == 'auto':
                 extension = extension[1:]
             else:

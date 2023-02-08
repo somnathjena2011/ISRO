@@ -62,18 +62,18 @@ def main():
     test_results['ssim_y'] = []
     test_results['psnr_b'] = []
     psnr, ssim, psnr_y, ssim_y, psnr_b = 0, 0, 0, 0, 0
-    print(f"folder={folder}")
+
+    print("PERFORMING SUPER RESOLUTION USING SWINIR")
 
     for idx, path in enumerate(sorted(glob.glob(os.path.join(folder, '*')))):
-        print(f"folder={folder}")
-        print(f"args fn={args.file_name}")
-        print(f"path={path}")
         if args.file_name is not None and args.file_name!=os.path.basename(path):
             continue
         # read image
         imgname, img_lq, img_gt = get_image_pair(args, path)  # image to HWC-BGR, float32
         img_lq = np.transpose(img_lq if img_lq.shape[2] == 1 else img_lq[:, :, [2, 1, 0]], (2, 0, 1))  # HCW-BGR to CHW-RGB
         img_lq = torch.from_numpy(img_lq).float().unsqueeze(0).to(device)  # CHW-RGB to NCHW-RGB
+
+        print("Input image shape = ", img_lq.shape)
 
         # inference
         with torch.no_grad():
@@ -91,6 +91,7 @@ def main():
         if output.ndim == 3:
             output = np.transpose(output[[2, 1, 0], :, :], (1, 2, 0))  # CHW-RGB to HCW-BGR
         output = (output * 255.0).round().astype(np.uint8)  # float32 to uint8
+        print("Output image shape = ", output.shape)
         if args.output_path is None:
             cv2.imwrite(f'results/{imgname}_{model_name}.png', output)
         else:

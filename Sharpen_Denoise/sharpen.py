@@ -30,11 +30,15 @@ def main():
         inPath = args.in_path
     if args.out_path:
         outPath = args.out_path
+
+    print("PERFORMING SHARPENING ON SUPER RESOLVED IMAGE USING GAUSSIAN BLUR")
     
     img = cv2.imread(inPath)
-    print(f"shape={img.shape}")
+    print(f"Input image shape={img.shape}")
 
     sharpened_img = sharpen(img, (5,5), 5)
+
+    print(f"Output image shape={sharpened_img.shape}")
 
     cv2.imwrite(outPath, sharpened_img)
 

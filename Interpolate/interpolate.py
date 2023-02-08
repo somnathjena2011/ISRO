@@ -8,7 +8,7 @@ argList = sys.argv[1:]
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--in_path")
 parser.add_argument("-o", "--out_path")
-parser.add_argument("-s", "--sf", type=int)
+parser.add_argument("-s", "--sf", type=float)
 args = parser.parse_args()
 sf = 4
 if args.sf:
@@ -22,12 +22,13 @@ if args.in_path:
 if args.out_path:
   outPath = args.out_path
 
-print("inPath")
-print(inPath)
+print(f"PERFORMING {sf}x INTERPOLATION")
 
 img = cv2.imread(inPath)
-print(f"shape={img.shape}")
+print(f"Input image shape={img.shape}")
 
 bicubic_img = cv2.resize(img,None, fx = sf, fy = sf, interpolation = cv2.INTER_CUBIC)
+
+print(f"Output image shape={bicubic_img.shape}")
 
 cv2.imwrite(outPath, bicubic_img)
