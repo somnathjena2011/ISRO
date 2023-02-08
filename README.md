@@ -6,18 +6,14 @@
 .
 ├── ESRGAN
 │   ├── assets
-│   ├── CODE_OF_CONDUCT.md
 │   ├── cog_predict.py
 │   ├── cog.yaml
 │   ├── experiments
 │   ├── inference_realesrgan.py
-│   ├── inference_realesrgan_video.py
 │   ├── inputs
-│   ├── LICENSE
 │   ├── main_test_realesrgan.py
 │   ├── MANIFEST.in
 │   ├── options
-│   ├── README_CN.md
 │   ├── README.md
 │   ├── realesrgan
 │   ├── realesrgan.egg-info
@@ -37,7 +33,6 @@
 │   ├── figures
 │   ├── hat
 │   ├── hat.egg-info
-│   ├── LICENSE
 │   ├── options
 │   ├── predict.py
 │   ├── README.md
@@ -53,9 +48,7 @@
 │   ├── demo
 │   ├── evaluate.py
 │   ├── figure
-│   ├── LICENSE
 │   ├── network
-│   ├── __pycache__
 │   ├── README.md
 │   ├── test.py
 │   └── utils.py
@@ -64,14 +57,12 @@
 │   ├── docs
 │   ├── figs
 │   ├── kernels
-│   ├── LICENSE
 │   ├── main_test_msrresnet.py
 │   ├── main_test_swinir.py
 │   ├── main_train_gan.py
 │   ├── main_train_psnr.py
 │   ├── matlab
 │   ├── models
-│   ├── model_zoo
 │   ├── options
 │   ├── pretrained_weights
 │   ├── README.md
@@ -87,4 +78,41 @@
 └── Sharpen_Denoise
     ├── NAFNet
     └── sharpen.py
+```
+
+# Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/somnathjena2011/ISRO.git
+
+# Change directory to repo directory
+cd ISRO
+
+# Download model weights from the following link
+# https://drive.google.com/drive/folders/1wmWoJ2gYrbt6Fqkyr3x8oS-cvFEfCic1?usp=sharing
+# Put the appropriate models in the appropriate weights folders
+
+# Download requirements for SwinIR
+cd MSR_SWINIR
+pip install -r requirement.txt
+cd ..
+
+# Download and setup requirements for RealESRGAN
+cd ESRGAN
+pip install basicsr
+pip install facexlib
+pip install gfpgan
+pip install -r requirements.txt
+python setup.py develop
+cd ..
+
+# Download and setup requirements for HAT
+cd HAT
+pip install -r requirements.txt
+python setup.py develop
+cd ..
+
+
+
 ```
