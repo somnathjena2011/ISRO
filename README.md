@@ -7,7 +7,12 @@
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#project-structure">Project Structure</a></li>
     <li><a href="#installations">Installations</a></li>
-    <li><a href="#usage">Usage</a></li>
+    <li>
+        <a href="#usage">Usage</a>
+        <ul>
+            <li><a href="#arguments-format">Arguments format</a></li>
+        </ul>
+    </li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -182,6 +187,8 @@ python pipeline.py -i <input_file_path> -o <output_file_path> sr --sr_model <mod
 | shp               |                      |                                                                       |                            |
 | den               |                      |                                                                       |                            |
 | --tile            | -t                   | tile size to avoid cuda error                                         | None                       |
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Model Description
 
