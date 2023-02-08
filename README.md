@@ -263,7 +263,7 @@ Architecutre of our proposed Lunar Turing-GAN (T-GAN)</p>
 
 * Original HR Image
 * Low Resolution image (Downsized from Original)
-* Depth map of Original Image
+* Manually annotated coordinates of hills and craters as separate .txt files
 
 We modify the conventional discriminator of conventional GANs with a novel turing loss that ensures the model places a special emphasis on the region of interest: in our case the craters and the hills. More specifically, as shown in the figure above, we have a Turing Test 1 (T1) which is trained to discriminate the fake image (SR) from the original image (HR). The Turing Test 2 (T2) is trained to perform the same discrimination only on the craters. Likewise Turing Test 3 (T3) is trained to discriminate the hills in the lunar surface. We detect the hills and craters from the OHRC images by manual annotation.
 
