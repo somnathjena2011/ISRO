@@ -257,8 +257,4 @@ We observe an increase in the number of hills and high altitude features on the 
 
 A 3D plot of the terrain for the original image and the super resolved image shows the effect of the super-resolution and the enhancement of physical features like slope and surface dimensions.
 
-![Alt text](images/isro_3d_plots.png?raw=true "Three dimensional terrain map of original and super-resolved DEM image")% of the pixels for identifying craters. 
-
-<!-- ACKNOWLEDGEMENTS -->
-
-## Acknowledgements
+![Alt text](images/isro_3d_plots.png?raw=true "Three dimensional terrain map of original and super-resolved DEM image") 
