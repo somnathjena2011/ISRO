@@ -233,7 +233,7 @@ We modify the conventional discriminator of conventional GANs with a novel turin
 
 We stitched the TMC-2 data to form the complete lunar atlas. THe map spans from -180° to +180° in longitude and -90° to 90° in latitude.
 
-![Alt text](images/stereo_resized.png?raw=true "Figure shows the stero projection for the polar images of the moon")
+<img src="images/stereo_resized.png" alt="Figure shows the stero projection for the polar images of the moon" height="1000">
 
 The above figure shows the stero projection centered on the South Pole of the moon, with a radius of 20° out from the Pole.
 
