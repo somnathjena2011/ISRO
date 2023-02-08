@@ -119,10 +119,8 @@ surface in the panchromatic spectral band (0.5-0.8 microns) with a spatial resol
 ### Installations
 
 ```bash
-# Clone the repository
-git clone https://github.com/somnathjena2011/ISRO.git
 
-# Change directory to repo directory
+# Change directory to project directory
 cd ISRO
 
 # Download model weights from the following link
@@ -236,6 +234,25 @@ We stitched the TMC-2 data to form the complete lunar atlas. THe map spans from 
 <img src="images/stereo_resized.png" alt="Figure shows the stero projection for the polar images of the moon" height="50%" width="50%">
 
 The above figure shows the stero projection centered on the South Pole of the moon, with a radius of 20° out from the Pole.
+
+## Eval of SR images using Feature Comparison
+
+Observing changes in lunar super-resolution images can provide valuable information about the geological and physical processes that have shaped the moon's surface over time. This can provide a better understanding of the moon's history and evolution, as well as help in planning for future missions to the moon. The high-resolution images can also reveal new features and details that were previously not visible, leading to new discoveries and scientific insights. We have built a variety of algorithms for comparison of physical features obtainable from the lunar images, before and after super-resolution. This conveys the improvement in the detection and analysis of features in the super-resolved images.
+
+### Dynamic Thresholding Algorithm:
+We have used a dynamic thresholding algorithm on the DEM data. We have made a histogram of the pixel values and have considered the top 2% of the pixels for identifying hills within the terrain data. Similarly, we have considered the bottom 2% of the pixels for identifying craters. 
+
+
+
+## Determination of Physical Features
+
+We observe an increase in the number of hills and high altitude features on the lunar surface due to an increase in the area covered under the altitude threshold. However, the increase and changes in shape are only observed for smaller features and not for large features. This shows that the super-resolution improves the DEM and image quality without and adding any extra features. 
+
+![Alt text](images/image(2).png?raw=true "Contour Plot of High Altitude terrain")
+
+A 3D plot of the terrain for the original image and the super resolved image shows the effect of the super-resolution and the enhancement of physical features like slope and surface dimensions.
+
+![Alt text](images/isro_3d_plots.png?raw=true "Three dimensional terrain map of original and super-resolved DEM image")
 
 <!-- ACKNOWLEDGEMENTS -->
 
